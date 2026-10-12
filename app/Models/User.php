@@ -24,6 +24,7 @@ class User extends Authenticatable
         'first_name',
         'last_name',
         'email',
+        'role',
         'password',
     ];
 
@@ -49,5 +50,9 @@ class User extends Authenticatable
             'password' => 'hashed',
               'role' => UserRole::class,
         ];
+    }
+
+    public function freelancerProfile(){
+        return $this->hasOne(freelancerProfile::class);
     }
 }

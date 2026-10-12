@@ -2,12 +2,14 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Enums\UserRole;
 use App\Services\ResponseService;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Override;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
 class RegisterRequest extends FormRequest
 {
@@ -32,7 +34,7 @@ class RegisterRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'unique:users,email'],
-            'role' => ['required', 'in:admin,client,freelancer'],
+            'role' => ['required', Rule::enum(UserRole::class)],
             'password' => ['required', 'string', 'min:8'],
         ];
     }
