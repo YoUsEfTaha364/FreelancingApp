@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-
+use App\Http\Controllers\Profile\ClientProfileController;
 use App\Http\Controllers\Profile\FreelancerProfileController;
 use App\Http\Controllers\Profile\FreelancerExperienceController;
 use App\Http\Controllers\Profile\FreelancerSkillController;
@@ -57,6 +57,17 @@ Route::middleware(["auth:sanctum", "freelancer"])
         // Languages
         Route::get("languages", [FreelancerLanguageController::class, "index"]);
         Route::put("languages", [FreelancerLanguageController::class, "update"]);
+
+
+    });
+
+Route::middleware(["auth:sanctum", "client"])
+    ->prefix("client")
+    ->group(function () {
+
+        // Profile
+        Route::get("profile", [ClientProfileController::class, "show"]);
+        Route::put("profile", [ClientProfileController::class, "update"]);
 
 
     });

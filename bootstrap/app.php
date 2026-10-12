@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\ClientMiddlewar;
 use App\Http\Middleware\FreelancerMiddlewar;
 use App\Services\ResponseService;
 use Illuminate\Auth\AuthenticationException;
@@ -17,7 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->alias(["freelancer"=>FreelancerMiddlewar::class]);
+        $middleware->alias(["freelancer"=>FreelancerMiddlewar::class,"client"=>ClientMiddlewar::class]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
 

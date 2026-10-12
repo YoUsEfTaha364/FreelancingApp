@@ -55,4 +55,7 @@ class User extends Authenticatable
     public function freelancerProfile(){
         return $this->hasOne(freelancerProfile::class);
     }
+    public function clientProfile(){
+        return $this->hasOne(ClientProfile::class);
+    }
 }

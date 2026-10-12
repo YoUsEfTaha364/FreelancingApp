@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserRole;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Models\ClientProfile;
 use App\Models\FreelancerProfile;
 use App\Models\User;
 use App\Services\ResponseService;
@@ -74,12 +76,19 @@ class AuthController extends Controller
         ]);
 
 
-
-        FreelancerProfile::create(
-            [
-                "user_id" => $user->id
-            ]
-        );
+        if ($user->role == UserRole::Freelancer) {
+            FreelancerProfile::create(
+                [
+                    "user_id" => $user->id
+                ]
+            );
+        } else {
+            ClientProfile::create([
+                
+                    "user_id" => $user->id
+                
+            ]);
+        }
 
         $token = $user->createToken('auth-token')->plainTextToken;
 
