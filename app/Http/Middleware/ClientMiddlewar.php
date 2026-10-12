@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\UserRole;
+use App\Services\ResponseService;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,7 +17,9 @@ class ClientMiddlewar
      */
     public function handle(Request $request, Closure $next)
     {
-        if($request->user()->role=="client")
-            return $next($request);
+        if ($request->user()->role != UserRole::Client)
+            return ResponseService::Response([], 401, "You are unauthorized");
+
+        return $next($request);
     }
 }
