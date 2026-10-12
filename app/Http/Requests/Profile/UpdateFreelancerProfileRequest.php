@@ -49,6 +49,10 @@ class UpdateFreelancerProfileRequest extends FormRequest
             'description' => 'The city where the freelancer is located. Maximum 100 characters.',
             'example' => 'Zagazig',
         ],
+        'hourly_rate' => [
+            'description' => 'rate money for hour.',
+            'example' => '$20',
+        ],
     ];
 }
 
@@ -69,11 +73,12 @@ class UpdateFreelancerProfileRequest extends FormRequest
 
             'biography' => ['required', 'string', 'max:2000'],
 
-            'phone' => ['required', 'string', 'max:20'],
+            'phone' => ['required', 'string', 'max:11','min:11','regex:/^(010|011|012|015)[0-9]{8}$/',],
 
             'country' => ['required', 'string', 'max:100'],
 
             'city' => ['required', 'string', 'max:100'],
+            'hourly_rate' => ['required', 'decimal'],
         ];
     }
 }
