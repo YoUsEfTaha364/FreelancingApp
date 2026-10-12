@@ -4,6 +4,81 @@ endpoints:
   -
     custom: []
     httpMethods:
+      - GET
+    uri: api/freelancer/profile
+    metadata:
+      custom: []
+      groupName: 'Freelancer Profile'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get freelancer profile data.'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "message": "Freelancer profile retrieved successfully",
+            "data": {
+              "profile": {
+                "id": 5,
+                "user_id": 8,
+                "gender": "male",
+                "title": "Full Stack Developer",
+                "biography": "Passionate developer specializing in building scalable web applications using Laravel, PHP, MySQL, and RESTful APIs. I enjoy solving complex problems and writing clean, maintainable code.",
+                "phone": "+201012345678",
+                "country": "Egypt",
+                "city": "Cairo",
+                "hourly_rate": 20,
+                "created_at": "2026-10-10T17:44:22.000000Z",
+                "updated_at": "2026-10-10T18:28:49.000000Z"
+              }
+            }
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "You are unauthorized",
+            "data": []
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "message": "Freelancer profile not found",
+            "data": []
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
       - PUT
     uri: api/freelancer/profile
     metadata:
@@ -62,7 +137,7 @@ endpoints:
       phone:
         custom: []
         name: phone
-        description: 'The freelancer contact phone number. Maximum 20 characters. Must not be greater than 20 characters.'
+        description: 'The freelancer contact phone number. Maximum 20 characters. Must match the regex /^(010|011|012|015)[0-9]{8}$/. Must not be greater than 11 characters. Must be at least 11 characters.'
         required: true
         example: '+201001234567'
         type: string
@@ -92,6 +167,17 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         deprecated: false
+      hourly_rate:
+        custom: []
+        name: hourly_rate
+        description: 'rate money for hour.'
+        required: true
+        example: $20
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
     cleanBodyParameters:
       gender: male
       title: 'Backend Laravel Developer'
@@ -99,6 +185,7 @@ endpoints:
       phone: '+201001234567'
       country: Egypt
       city: Zagazig
+      hourly_rate: $20
     fileParameters: []
     responses:
       -
@@ -117,7 +204,7 @@ endpoints:
                 "phone": "+201012345678",
                 "country": "Egypt",
                 "city": "Cairo",
-                "hourly_rate": null,
+                "hourly_rate": 20,
                 "created_at": "2026-10-10T17:44:22.000000Z",
                 "updated_at": "2026-10-10T18:28:49.000000Z"
               }
@@ -1039,7 +1126,7 @@ endpoints:
         name: 'languages[].proficiency'
         description: ''
         required: true
-        example: beginner
+        example: fluent
         type: string
         enumValues:
           - beginner

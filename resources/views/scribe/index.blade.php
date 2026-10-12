@@ -85,12 +85,28 @@
                             </li>
                                                                         </ul>
                             </ul>
+                    <ul id="tocify-header-client-profile" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="client-profile">
+                    <a href="#client-profile">Client Profile</a>
+                </li>
+                                    <ul id="tocify-subheader-client-profile" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="client-profile-GETapi-client-profile">
+                                <a href="#client-profile-GETapi-client-profile">Get client profile</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="client-profile-PUTapi-client-profile">
+                                <a href="#client-profile-PUTapi-client-profile">Update client profile</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
                     <ul id="tocify-header-freelancer-profile" class="tocify-header">
                 <li class="tocify-item level-1" data-unique="freelancer-profile">
                     <a href="#freelancer-profile">Freelancer Profile</a>
                 </li>
                                     <ul id="tocify-subheader-freelancer-profile" class="tocify-subheader">
-                                                    <li class="tocify-item level-2" data-unique="freelancer-profile-PUTapi-freelancer-profile">
+                                                    <li class="tocify-item level-2" data-unique="freelancer-profile-GETapi-freelancer-profile">
+                                <a href="#freelancer-profile-GETapi-freelancer-profile">Get freelancer profile data.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="freelancer-profile-PUTapi-freelancer-profile">
                                 <a href="#freelancer-profile-PUTapi-freelancer-profile">Update freelancer profile data.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="freelancer-profile-GETapi-freelancer-experiences">
@@ -131,7 +147,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: October 11, 2026</li>
+        <li>Last updated: October 12, 2026</li>
     </ul>
 </div>
 
@@ -812,11 +828,550 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
+                <h1 id="client-profile">Client Profile</h1>
+
+    
+
+                                <h2 id="client-profile-GETapi-client-profile">Get client profile</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Retrieve the authenticated client's profile information.</p>
+
+<span id="example-requests-GETapi-client-profile">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/client/profile" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/client/profile"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-client-profile">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Client profile retrieved successfully&quot;,
+    &quot;data&quot;: {
+        &quot;profile&quot;: {
+            &quot;id&quot;: 1,
+            &quot;user_id&quot;: 5,
+            &quot;company_name&quot;: &quot;Tech Solutions&quot;,
+            &quot;phone&quot;: &quot;01012345678&quot;,
+            &quot;country&quot;: &quot;Egypt&quot;,
+            &quot;city&quot;: &quot;Cairo&quot;
+        }
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;data&quot;: []
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Client profile not found&quot;,
+    &quot;data&quot;: []
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-client-profile" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-client-profile"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-client-profile"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-client-profile" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-client-profile">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-client-profile" data-method="GET"
+      data-path="api/client/profile"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-client-profile', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-client-profile"
+                    onclick="tryItOut('GETapi-client-profile');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-client-profile"
+                    onclick="cancelTryOut('GETapi-client-profile');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-client-profile"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/client/profile</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-client-profile"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-client-profile"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="client-profile-PUTapi-client-profile">Update client profile</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Update the authenticated client's profile information.</p>
+
+<span id="example-requests-PUTapi-client-profile">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "http://localhost/api/client/profile" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"company_name\": \"Tech Solutions\",
+    \"phone\": \"01012345678\",
+    \"country\": \"Egypt\",
+    \"city\": \"Cairo\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/client/profile"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "company_name": "Tech Solutions",
+    "phone": "01012345678",
+    "country": "Egypt",
+    "city": "Cairo"
+};
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-client-profile">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Client profile updated successfully&quot;,
+    &quot;data&quot;: {
+        &quot;profile&quot;: {
+            &quot;id&quot;: 1,
+            &quot;user_id&quot;: 5,
+            &quot;company_name&quot;: &quot;Tech Solutions&quot;,
+            &quot;phone&quot;: &quot;01012345678&quot;,
+            &quot;country&quot;: &quot;Egypt&quot;,
+            &quot;city&quot;: &quot;Cairo&quot;
+        }
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;You are unauthorized&quot;,
+    &quot;data&quot;: []
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Client profile not found&quot;,
+    &quot;data&quot;: []
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;validation errors&quot;,
+    &quot;data&quot;: {
+        &quot;phone&quot;: [
+            &quot;The phone format is invalid.&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-PUTapi-client-profile" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-client-profile"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-client-profile"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PUTapi-client-profile" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-client-profile">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PUTapi-client-profile" data-method="PUT"
+      data-path="api/client/profile"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-client-profile', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-client-profile"
+                    onclick="tryItOut('PUTapi-client-profile');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-client-profile"
+                    onclick="cancelTryOut('PUTapi-client-profile');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-client-profile"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/client/profile</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PUTapi-client-profile"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PUTapi-client-profile"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>company_name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="company_name"                data-endpoint="PUTapi-client-profile"
+               value="Tech Solutions"
+               data-component="body">
+    <br>
+<p>nullable The company name. Example: <code>Tech Solutions</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="phone"                data-endpoint="PUTapi-client-profile"
+               value="01012345678"
+               data-component="body">
+    <br>
+<p>nullable Egyptian mobile number. Example: <code>01012345678</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>country</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="country"                data-endpoint="PUTapi-client-profile"
+               value="Egypt"
+               data-component="body">
+    <br>
+<p>nullable The country. Example: <code>Egypt</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>city</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="city"                data-endpoint="PUTapi-client-profile"
+               value="Cairo"
+               data-component="body">
+    <br>
+<p>nullable The city. Example: <code>Cairo</code></p>
+        </div>
+        </form>
+
                 <h1 id="freelancer-profile">Freelancer Profile</h1>
 
     
 
-                                <h2 id="freelancer-profile-PUTapi-freelancer-profile">Update freelancer profile data.</h2>
+                                <h2 id="freelancer-profile-GETapi-freelancer-profile">Get freelancer profile data.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-freelancer-profile">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/freelancer/profile" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/freelancer/profile"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-freelancer-profile">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Freelancer profile retrieved successfully&quot;,
+    &quot;data&quot;: {
+        &quot;profile&quot;: {
+            &quot;id&quot;: 5,
+            &quot;user_id&quot;: 8,
+            &quot;gender&quot;: &quot;male&quot;,
+            &quot;title&quot;: &quot;Full Stack Developer&quot;,
+            &quot;biography&quot;: &quot;Passionate developer specializing in building scalable web applications using Laravel, PHP, MySQL, and RESTful APIs. I enjoy solving complex problems and writing clean, maintainable code.&quot;,
+            &quot;phone&quot;: &quot;+201012345678&quot;,
+            &quot;country&quot;: &quot;Egypt&quot;,
+            &quot;city&quot;: &quot;Cairo&quot;,
+            &quot;hourly_rate&quot;: 20,
+            &quot;created_at&quot;: &quot;2026-10-10T17:44:22.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2026-10-10T18:28:49.000000Z&quot;
+        }
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;You are unauthorized&quot;,
+    &quot;data&quot;: []
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Freelancer profile not found&quot;,
+    &quot;data&quot;: []
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-freelancer-profile" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-freelancer-profile"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-freelancer-profile"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-freelancer-profile" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-freelancer-profile">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-freelancer-profile" data-method="GET"
+      data-path="api/freelancer/profile"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-freelancer-profile', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-freelancer-profile"
+                    onclick="tryItOut('GETapi-freelancer-profile');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-freelancer-profile"
+                    onclick="cancelTryOut('GETapi-freelancer-profile');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-freelancer-profile"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/freelancer/profile</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-freelancer-profile"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-freelancer-profile"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="freelancer-profile-PUTapi-freelancer-profile">Update freelancer profile data.</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -839,7 +1394,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"biography\": \"I am a backend developer specializing in Laravel, RESTful APIs, and MySQL.\",
     \"phone\": \"+201001234567\",
     \"country\": \"Egypt\",
-    \"city\": \"Zagazig\"
+    \"city\": \"Zagazig\",
+    \"hourly_rate\": \"$20\"
 }"
 </code></pre></div>
 
@@ -860,7 +1416,8 @@ let body = {
     "biography": "I am a backend developer specializing in Laravel, RESTful APIs, and MySQL.",
     "phone": "+201001234567",
     "country": "Egypt",
-    "city": "Zagazig"
+    "city": "Zagazig",
+    "hourly_rate": "$20"
 };
 
 fetch(url, {
@@ -889,7 +1446,7 @@ fetch(url, {
             &quot;phone&quot;: &quot;+201012345678&quot;,
             &quot;country&quot;: &quot;Egypt&quot;,
             &quot;city&quot;: &quot;Cairo&quot;,
-            &quot;hourly_rate&quot;: null,
+            &quot;hourly_rate&quot;: 20,
             &quot;created_at&quot;: &quot;2026-10-10T17:44:22.000000Z&quot;,
             &quot;updated_at&quot;: &quot;2026-10-10T18:28:49.000000Z&quot;
         }
@@ -1044,7 +1601,7 @@ Must be one of:
                value="+201001234567"
                data-component="body">
     <br>
-<p>The freelancer contact phone number. Maximum 20 characters. Must not be greater than 20 characters. Example: <code>+201001234567</code></p>
+<p>The freelancer contact phone number. Maximum 20 characters. Must match the regex /^(010|011|012|015)[0-9]{8}$/. Must not be greater than 11 characters. Must be at least 11 characters. Example: <code>+201001234567</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>country</code></b>&nbsp;&nbsp;
@@ -1069,6 +1626,18 @@ Must be one of:
                data-component="body">
     <br>
 <p>The city where the freelancer is located. Maximum 100 characters. Must not be greater than 100 characters. Example: <code>Zagazig</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>hourly_rate</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="hourly_rate"                data-endpoint="PUTapi-freelancer-profile"
+               value="$20"
+               data-component="body">
+    <br>
+<p>rate money for hour. Example: <code>$20</code></p>
         </div>
         </form>
 
@@ -2818,10 +3387,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="languages.0.proficiency"                data-endpoint="PUTapi-freelancer-languages"
-               value="beginner"
+               value="fluent"
                data-component="body">
     <br>
-<p>Example: <code>beginner</code></p>
+<p>Example: <code>fluent</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>beginner</code></li> <li><code>intermediate</code></li> <li><code>fluent</code></li> <li><code>native</code></li></ul>
                     </div>
