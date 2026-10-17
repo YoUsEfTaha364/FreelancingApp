@@ -85,6 +85,31 @@
                             </li>
                                                                         </ul>
                             </ul>
+                    <ul id="tocify-header-client-jobs" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="client-jobs">
+                    <a href="#client-jobs">Client Jobs</a>
+                </li>
+                                    <ul id="tocify-subheader-client-jobs" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="client-jobs-GETapi-client-jobs">
+                                <a href="#client-jobs-GETapi-client-jobs">List the authenticated client's jobs.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="client-jobs-POSTapi-client-jobs">
+                                <a href="#client-jobs-POSTapi-client-jobs">Create a job post.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="client-jobs-GETapi-client-jobs--job_id-">
+                                <a href="#client-jobs-GETapi-client-jobs--job_id-">Show one of the client's jobs.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="client-jobs-PATCHapi-client-jobs--job_id-">
+                                <a href="#client-jobs-PATCHapi-client-jobs--job_id-">Update a job post.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="client-jobs-PATCHapi-client-jobs--job_id--status">
+                                <a href="#client-jobs-PATCHapi-client-jobs--job_id--status">change a job post status.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="client-jobs-DELETEapi-client-jobs--job_id-">
+                                <a href="#client-jobs-DELETEapi-client-jobs--job_id-">Delete a job post.</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
                     <ul id="tocify-header-client-profile" class="tocify-header">
                 <li class="tocify-item level-1" data-unique="client-profile">
                     <a href="#client-profile">Client Profile</a>
@@ -138,6 +163,19 @@
                             </li>
                                                                         </ul>
                             </ul>
+                    <ul id="tocify-header-job-discovery" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="job-discovery">
+                    <a href="#job-discovery">Job Discovery</a>
+                </li>
+                                    <ul id="tocify-subheader-job-discovery" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="job-discovery-GETapi-jobs">
+                                <a href="#job-discovery-GETapi-jobs">Browse open jobs.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="job-discovery-GETapi-jobs--job_id-">
+                                <a href="#job-discovery-GETapi-jobs--job_id-">Show a single open job.</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
             </div>
 
     <ul class="toc-footer" id="toc-footer">
@@ -147,7 +185,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: October 12, 2026</li>
+        <li>Last updated: October 15, 2026</li>
     </ul>
 </div>
 
@@ -827,6 +865,1436 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>Example: <code>application/json</code></p>
             </div>
                         </form>
+
+                <h1 id="client-jobs">Client Jobs</h1>
+
+    
+
+                                <h2 id="client-jobs-GETapi-client-jobs">List the authenticated client&#039;s jobs.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Returns a paginated list of all jobs posted by the authenticated client.
+Supports optional filtering by status and category.</p>
+
+<span id="example-requests-GETapi-client-jobs">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/client/jobs?status=open&amp;category_id=1&amp;per_page=10" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/client/jobs"
+);
+
+const params = {
+    "status": "open",
+    "category_id": "1",
+    "per_page": "10",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-client-jobs">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Client jobs retrieved successfully&quot;,
+    &quot;data&quot;: {
+        &quot;jobs&quot;: {
+            &quot;current_page&quot;: 1,
+            &quot;data&quot;: [
+                {
+                    &quot;id&quot;: 1,
+                    &quot;user_id&quot;: 3,
+                    &quot;category_id&quot;: 1,
+                    &quot;title&quot;: &quot;Build a Laravel REST API&quot;,
+                    &quot;description&quot;: &quot;We need a skilled Laravel developer...&quot;,
+                    &quot;budget_min&quot;: &quot;500.00&quot;,
+                    &quot;budget_max&quot;: &quot;2000.00&quot;,
+                    &quot;experience_level&quot;: &quot;intermediate&quot;,
+                    &quot;deadline&quot;: &quot;2027-03-01&quot;,
+                    &quot;status&quot;: &quot;open&quot;,
+                    &quot;created_at&quot;: &quot;2026-10-13T10:00:00.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2026-10-13T10:00:00.000000Z&quot;,
+                    &quot;category&quot;: {
+                        &quot;id&quot;: 1,
+                        &quot;name&quot;: &quot;Web Development&quot;,
+                        &quot;slug&quot;: &quot;web-development&quot;
+                    },
+                    &quot;skills&quot;: [
+                        {
+                            &quot;id&quot;: 1,
+                            &quot;name&quot;: &quot;PHP&quot;
+                        },
+                        {
+                            &quot;id&quot;: 2,
+                            &quot;name&quot;: &quot;Laravel&quot;
+                        }
+                    ]
+                }
+            ],
+            &quot;per_page&quot;: 15,
+            &quot;total&quot;: 1
+        }
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;You are unauthenticated , must register or login&quot;,
+    &quot;data&quot;: []
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-client-jobs" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-client-jobs"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-client-jobs"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-client-jobs" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-client-jobs">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-client-jobs" data-method="GET"
+      data-path="api/client/jobs"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-client-jobs', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-client-jobs"
+                    onclick="tryItOut('GETapi-client-jobs');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-client-jobs"
+                    onclick="cancelTryOut('GETapi-client-jobs');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-client-jobs"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/client/jobs</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-client-jobs"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-client-jobs"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>status</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="status"                data-endpoint="GETapi-client-jobs"
+               value="open"
+               data-component="query">
+    <br>
+<p>optional Filter by status. Allowed: open, closed. Example: <code>open</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>category_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="category_id"                data-endpoint="GETapi-client-jobs"
+               value="1"
+               data-component="query">
+    <br>
+<p>optional Filter by category ID. Example: <code>1</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>per_page</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="per_page"                data-endpoint="GETapi-client-jobs"
+               value="10"
+               data-component="query">
+    <br>
+<p>optional Results per page (1–50). Default: 15. Example: <code>10</code></p>
+            </div>
+                </form>
+
+                    <h2 id="client-jobs-POSTapi-client-jobs">Create a job post.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Creates a new job post owned by the authenticated client.
+The user_id and initial status are set server-side.</p>
+
+<span id="example-requests-POSTapi-client-jobs">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/client/jobs" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"title\": \"Build a Laravel REST API\",
+    \"description\": \"We need a skilled Laravel developer to build a REST API.\",
+    \"category_id\": 1,
+    \"budget_min\": 500,
+    \"budget_max\": 2000,
+    \"experience_level\": \"intermediate\",
+    \"deadline\": \"2027-03-01\",
+    \"skill_ids\": [
+        1,
+        2,
+        3
+    ]
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/client/jobs"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "title": "Build a Laravel REST API",
+    "description": "We need a skilled Laravel developer to build a REST API.",
+    "category_id": 1,
+    "budget_min": 500,
+    "budget_max": 2000,
+    "experience_level": "intermediate",
+    "deadline": "2027-03-01",
+    "skill_ids": [
+        1,
+        2,
+        3
+    ]
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-client-jobs">
+            <blockquote>
+            <p>Example response (201):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Job created successfully&quot;,
+    &quot;data&quot;: {
+        &quot;job&quot;: {
+            &quot;id&quot;: 1,
+            &quot;user_id&quot;: 3,
+            &quot;category_id&quot;: 1,
+            &quot;title&quot;: &quot;Build a Laravel REST API&quot;,
+            &quot;description&quot;: &quot;We need a skilled Laravel developer...&quot;,
+            &quot;budget_min&quot;: &quot;500.00&quot;,
+            &quot;budget_max&quot;: &quot;2000.00&quot;,
+            &quot;experience_level&quot;: &quot;intermediate&quot;,
+            &quot;deadline&quot;: &quot;2027-03-01&quot;,
+            &quot;status&quot;: &quot;open&quot;,
+            &quot;category&quot;: {
+                &quot;id&quot;: 1,
+                &quot;name&quot;: &quot;Web Development&quot;,
+                &quot;slug&quot;: &quot;web-development&quot;
+            },
+            &quot;skills&quot;: [
+                {
+                    &quot;id&quot;: 1,
+                    &quot;name&quot;: &quot;PHP&quot;
+                },
+                {
+                    &quot;id&quot;: 2,
+                    &quot;name&quot;: &quot;Laravel&quot;
+                }
+            ]
+        }
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;You are unauthenticated , must register or login&quot;,
+    &quot;data&quot;: []
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Validation errors&quot;,
+    &quot;data&quot;: {
+        &quot;title&quot;: [
+            &quot;The title field is required.&quot;
+        ],
+        &quot;budget_max&quot;: [
+            &quot;The budget max must be greater than or equal to budget min.&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-client-jobs" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-client-jobs"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-client-jobs"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-client-jobs" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-client-jobs">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-client-jobs" data-method="POST"
+      data-path="api/client/jobs"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-client-jobs', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-client-jobs"
+                    onclick="tryItOut('POSTapi-client-jobs');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-client-jobs"
+                    onclick="cancelTryOut('POSTapi-client-jobs');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-client-jobs"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/client/jobs</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-client-jobs"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-client-jobs"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>title</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="title"                data-endpoint="POSTapi-client-jobs"
+               value="Build a Laravel REST API"
+               data-component="body">
+    <br>
+<p>Job title. Max 255 characters. Example: <code>Build a Laravel REST API</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>description</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="description"                data-endpoint="POSTapi-client-jobs"
+               value="We need a skilled Laravel developer to build a REST API."
+               data-component="body">
+    <br>
+<p>Detailed job description. Max 5000 characters. Example: <code>We need a skilled Laravel developer to build a REST API.</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>category_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="category_id"                data-endpoint="POSTapi-client-jobs"
+               value="1"
+               data-component="body">
+    <br>
+<p>Existing category ID. Example: <code>1</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>budget_min</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="budget_min"                data-endpoint="POSTapi-client-jobs"
+               value="500"
+               data-component="body">
+    <br>
+<p>nullable Minimum budget in USD. Example: <code>500</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>budget_max</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="budget_max"                data-endpoint="POSTapi-client-jobs"
+               value="2000"
+               data-component="body">
+    <br>
+<p>nullable Maximum budget in USD (&gt;= budget_min). Example: <code>2000</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>experience_level</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="experience_level"                data-endpoint="POSTapi-client-jobs"
+               value="intermediate"
+               data-component="body">
+    <br>
+<p>Required experience level. Allowed: entry, intermediate, expert. Example: <code>intermediate</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>deadline</code></b>&nbsp;&nbsp;
+<small>date</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="deadline"                data-endpoint="POSTapi-client-jobs"
+               value="2027-03-01"
+               data-component="body">
+    <br>
+<p>nullable Optional project deadline (must be in the future). Example: <code>2027-03-01</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>skill_ids</code></b>&nbsp;&nbsp;
+<small>integer[]</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="skill_ids[0]"                data-endpoint="POSTapi-client-jobs"
+               data-component="body">
+        <input type="number" style="display: none"
+               name="skill_ids[1]"                data-endpoint="POSTapi-client-jobs"
+               data-component="body">
+    <br>
+<p>nullable Optional array of existing skill IDs.</p>
+        </div>
+        </form>
+
+                    <h2 id="client-jobs-GETapi-client-jobs--job_id-">Show one of the client&#039;s jobs.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Retrieves a specific job post belonging to the authenticated client.</p>
+
+<span id="example-requests-GETapi-client-jobs--job_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/client/jobs/1" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/client/jobs/1"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-client-jobs--job_id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Job retrieved successfully&quot;,
+    &quot;data&quot;: {
+        &quot;job&quot;: {
+            &quot;id&quot;: 1,
+            &quot;user_id&quot;: 3,
+            &quot;category_id&quot;: 1,
+            &quot;title&quot;: &quot;Build a Laravel REST API&quot;,
+            &quot;description&quot;: &quot;We need a skilled Laravel developer...&quot;,
+            &quot;budget_min&quot;: &quot;500.00&quot;,
+            &quot;budget_max&quot;: &quot;2000.00&quot;,
+            &quot;experience_level&quot;: &quot;intermediate&quot;,
+            &quot;deadline&quot;: &quot;2027-03-01&quot;,
+            &quot;status&quot;: &quot;open&quot;,
+            &quot;category&quot;: {
+                &quot;id&quot;: 1,
+                &quot;name&quot;: &quot;Web Development&quot;,
+                &quot;slug&quot;: &quot;web-development&quot;
+            },
+            &quot;skills&quot;: [
+                {
+                    &quot;id&quot;: 1,
+                    &quot;name&quot;: &quot;PHP&quot;
+                }
+            ]
+        }
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;You are unauthenticated , must register or login&quot;,
+    &quot;data&quot;: []
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;This action is unauthorized.&quot;,
+    &quot;data&quot;: []
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Resource not found&quot;,
+    &quot;data&quot;: []
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-client-jobs--job_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-client-jobs--job_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-client-jobs--job_id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-client-jobs--job_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-client-jobs--job_id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-client-jobs--job_id-" data-method="GET"
+      data-path="api/client/jobs/{job_id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-client-jobs--job_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-client-jobs--job_id-"
+                    onclick="tryItOut('GETapi-client-jobs--job_id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-client-jobs--job_id-"
+                    onclick="cancelTryOut('GETapi-client-jobs--job_id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-client-jobs--job_id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/client/jobs/{job_id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-client-jobs--job_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-client-jobs--job_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>job_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="job_id"                data-endpoint="GETapi-client-jobs--job_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the job. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>job</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="job"                data-endpoint="GETapi-client-jobs--job_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the job. Example: <code>1</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="client-jobs-PATCHapi-client-jobs--job_id-">Update a job post.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Partially updates an existing job. Only the supplied fields are changed.
+When skill_ids is omitted, skills remain unchanged.
+When an empty array is supplied for skill_ids, all skills are removed.</p>
+
+<span id="example-requests-PATCHapi-client-jobs--job_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PATCH \
+    "http://localhost/api/client/jobs/1" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"title\": \"Build a React Dashboard\",
+    \"description\": \"New description.\",
+    \"category_id\": 2,
+    \"budget_min\": 300,
+    \"budget_max\": 1500,
+    \"experience_level\": \"expert\",
+    \"deadline\": \"2027-06-01\",
+    \"skill_ids\": [
+        1,
+        4
+    ]
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/client/jobs/1"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "title": "Build a React Dashboard",
+    "description": "New description.",
+    "category_id": 2,
+    "budget_min": 300,
+    "budget_max": 1500,
+    "experience_level": "expert",
+    "deadline": "2027-06-01",
+    "skill_ids": [
+        1,
+        4
+    ]
+};
+
+fetch(url, {
+    method: "PATCH",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-PATCHapi-client-jobs--job_id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Job updated successfully&quot;,
+    &quot;data&quot;: {
+        &quot;job&quot;: {
+            &quot;id&quot;: 1,
+            &quot;title&quot;: &quot;Build a React Dashboard&quot;,
+            &quot;status&quot;: &quot;open&quot;,
+            &quot;category&quot;: {
+                &quot;id&quot;: 2,
+                &quot;name&quot;: &quot;UI/UX Design&quot;,
+                &quot;slug&quot;: &quot;ui-ux-design&quot;
+            },
+            &quot;skills&quot;: [
+                {
+                    &quot;id&quot;: 1,
+                    &quot;name&quot;: &quot;PHP&quot;
+                }
+            ]
+        }
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;This action is unauthorized.&quot;,
+    &quot;data&quot;: []
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Resource not found&quot;,
+    &quot;data&quot;: []
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Validation errors&quot;,
+    &quot;data&quot;: {
+        &quot;budget_max&quot;: [
+            &quot;The budget max must be greater than or equal to budget min.&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-PATCHapi-client-jobs--job_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PATCHapi-client-jobs--job_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PATCHapi-client-jobs--job_id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PATCHapi-client-jobs--job_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PATCHapi-client-jobs--job_id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PATCHapi-client-jobs--job_id-" data-method="PATCH"
+      data-path="api/client/jobs/{job_id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PATCHapi-client-jobs--job_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PATCHapi-client-jobs--job_id-"
+                    onclick="tryItOut('PATCHapi-client-jobs--job_id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PATCHapi-client-jobs--job_id-"
+                    onclick="cancelTryOut('PATCHapi-client-jobs--job_id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PATCHapi-client-jobs--job_id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/client/jobs/{job_id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PATCHapi-client-jobs--job_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PATCHapi-client-jobs--job_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>job_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="job_id"                data-endpoint="PATCHapi-client-jobs--job_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the job. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>job</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="job"                data-endpoint="PATCHapi-client-jobs--job_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the job. Example: <code>1</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>title</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="title"                data-endpoint="PATCHapi-client-jobs--job_id-"
+               value="Build a React Dashboard"
+               data-component="body">
+    <br>
+<p>optional Job title. Max 255 characters. Example: <code>Build a React Dashboard</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>description</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="description"                data-endpoint="PATCHapi-client-jobs--job_id-"
+               value="New description."
+               data-component="body">
+    <br>
+<p>optional Updated job description. Example: <code>New description.</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>category_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="category_id"                data-endpoint="PATCHapi-client-jobs--job_id-"
+               value="2"
+               data-component="body">
+    <br>
+<p>optional Existing category ID. Example: <code>2</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>budget_min</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="budget_min"                data-endpoint="PATCHapi-client-jobs--job_id-"
+               value="300"
+               data-component="body">
+    <br>
+<p>nullable Minimum budget in USD. Example: <code>300</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>budget_max</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="budget_max"                data-endpoint="PATCHapi-client-jobs--job_id-"
+               value="1500"
+               data-component="body">
+    <br>
+<p>nullable Maximum budget in USD. Example: <code>1500</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>experience_level</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="experience_level"                data-endpoint="PATCHapi-client-jobs--job_id-"
+               value="expert"
+               data-component="body">
+    <br>
+<p>optional Allowed: entry, intermediate, expert. Example: <code>expert</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>deadline</code></b>&nbsp;&nbsp;
+<small>date</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="deadline"                data-endpoint="PATCHapi-client-jobs--job_id-"
+               value="2027-06-01"
+               data-component="body">
+    <br>
+<p>nullable Project deadline (future date). Example: <code>2027-06-01</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>skill_ids</code></b>&nbsp;&nbsp;
+<small>integer[]</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="skill_ids[0]"                data-endpoint="PATCHapi-client-jobs--job_id-"
+               data-component="body">
+        <input type="number" style="display: none"
+               name="skill_ids[1]"                data-endpoint="PATCHapi-client-jobs--job_id-"
+               data-component="body">
+    <br>
+<p>nullable Omit to leave unchanged. Empty array removes all skills.</p>
+        </div>
+        </form>
+
+                    <h2 id="client-jobs-PATCHapi-client-jobs--job_id--status">change a job post status.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Changes the job status to 'closed'. Only the owner can close a job.
+A job that is already closed cannot be closed again.
+Changes the job status to 'closed'. Only the owner can close a job.
+A job that is already closed cannot be closed again.</p>
+
+<span id="example-requests-PATCHapi-client-jobs--job_id--status">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PATCH \
+    "http://localhost/api/client/jobs/1/status" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"status\": \"opened\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/client/jobs/1/status"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "status": "opened"
+};
+
+fetch(url, {
+    method: "PATCH",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-PATCHapi-client-jobs--job_id--status">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Job closed successfully&quot;,
+    &quot;data&quot;: {
+        &quot;job&quot;: {
+            &quot;id&quot;: 1,
+            &quot;status&quot;: &quot;closed&quot;
+        }
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;This action is unauthorized.&quot;,
+    &quot;data&quot;: []
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Resource not found&quot;,
+    &quot;data&quot;: []
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Job is already closed.&quot;,
+    &quot;data&quot;: []
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-PATCHapi-client-jobs--job_id--status" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PATCHapi-client-jobs--job_id--status"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PATCHapi-client-jobs--job_id--status"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PATCHapi-client-jobs--job_id--status" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PATCHapi-client-jobs--job_id--status">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PATCHapi-client-jobs--job_id--status" data-method="PATCH"
+      data-path="api/client/jobs/{job_id}/status"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PATCHapi-client-jobs--job_id--status', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PATCHapi-client-jobs--job_id--status"
+                    onclick="tryItOut('PATCHapi-client-jobs--job_id--status');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PATCHapi-client-jobs--job_id--status"
+                    onclick="cancelTryOut('PATCHapi-client-jobs--job_id--status');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PATCHapi-client-jobs--job_id--status"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/client/jobs/{job_id}/status</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PATCHapi-client-jobs--job_id--status"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PATCHapi-client-jobs--job_id--status"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>job_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="job_id"                data-endpoint="PATCHapi-client-jobs--job_id--status"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the job. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>job</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="job"                data-endpoint="PATCHapi-client-jobs--job_id--status"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the job to close. Example: <code>1</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>status</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="status"                data-endpoint="PATCHapi-client-jobs--job_id--status"
+               value="opened"
+               data-component="body">
+    <br>
+<p>status , must be string closed or opened . Example: <code>opened</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>closed</code></li> <li><code>opened</code></li></ul>
+        </div>
+        </form>
+
+                    <h2 id="client-jobs-DELETEapi-client-jobs--job_id-">Delete a job post.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Permanently deletes a job post owned by the authenticated client.
+Associated skill links are removed via cascade.</p>
+
+<span id="example-requests-DELETEapi-client-jobs--job_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "http://localhost/api/client/jobs/1" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/client/jobs/1"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-client-jobs--job_id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Job deleted successfully&quot;,
+    &quot;data&quot;: []
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;This action is unauthorized.&quot;,
+    &quot;data&quot;: []
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Resource not found&quot;,
+    &quot;data&quot;: []
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-DELETEapi-client-jobs--job_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-client-jobs--job_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-client-jobs--job_id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-client-jobs--job_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-client-jobs--job_id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-client-jobs--job_id-" data-method="DELETE"
+      data-path="api/client/jobs/{job_id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-client-jobs--job_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-client-jobs--job_id-"
+                    onclick="tryItOut('DELETEapi-client-jobs--job_id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-client-jobs--job_id-"
+                    onclick="cancelTryOut('DELETEapi-client-jobs--job_id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-client-jobs--job_id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/client/jobs/{job_id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="DELETEapi-client-jobs--job_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="DELETEapi-client-jobs--job_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>job_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="job_id"                data-endpoint="DELETEapi-client-jobs--job_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the job. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>job</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="job"                data-endpoint="DELETEapi-client-jobs--job_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the job to delete. Example: <code>1</code></p>
+            </div>
+                    </form>
 
                 <h1 id="client-profile">Client Profile</h1>
 
@@ -3387,10 +4855,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="languages.0.proficiency"                data-endpoint="PUTapi-freelancer-languages"
-               value="fluent"
+               value="native"
                data-component="body">
     <br>
-<p>Example: <code>fluent</code></p>
+<p>Example: <code>native</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>beginner</code></li> <li><code>intermediate</code></li> <li><code>fluent</code></li> <li><code>native</code></li></ul>
                     </div>
@@ -3433,6 +4901,461 @@ Must be one of:
                                         </details>
         </div>
         </form>
+
+                <h1 id="job-discovery">Job Discovery</h1>
+
+    
+
+                                <h2 id="job-discovery-GETapi-jobs">Browse open jobs.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Returns a paginated list of all open job posts available for discovery.
+Supports filtering by category, experience level, budget range, and required skills.
+Draft and closed jobs are never returned.</p>
+
+<span id="example-requests-GETapi-jobs">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/jobs?category_id=1&amp;experience_level=intermediate&amp;budget_min=500&amp;budget_max=3000&amp;skill_ids[]=1&amp;skill_ids[]=2&amp;per_page=10" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/jobs"
+);
+
+const params = {
+    "category_id": "1",
+    "experience_level": "intermediate",
+    "budget_min": "500",
+    "budget_max": "3000",
+    "skill_ids[0]": "1",
+    "skill_ids[1]": "2",
+    "per_page": "10",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-jobs">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Open jobs retrieved successfully&quot;,
+    &quot;data&quot;: {
+        &quot;jobs&quot;: {
+            &quot;current_page&quot;: 1,
+            &quot;data&quot;: [
+                {
+                    &quot;id&quot;: 1,
+                    &quot;category_id&quot;: 1,
+                    &quot;title&quot;: &quot;Build a Laravel REST API&quot;,
+                    &quot;description&quot;: &quot;We need a skilled Laravel developer...&quot;,
+                    &quot;budget_min&quot;: &quot;500.00&quot;,
+                    &quot;budget_max&quot;: &quot;2000.00&quot;,
+                    &quot;experience_level&quot;: &quot;intermediate&quot;,
+                    &quot;deadline&quot;: &quot;2027-03-01&quot;,
+                    &quot;status&quot;: &quot;open&quot;,
+                    &quot;created_at&quot;: &quot;2026-10-13T10:00:00.000000Z&quot;,
+                    &quot;category&quot;: {
+                        &quot;id&quot;: 1,
+                        &quot;name&quot;: &quot;Web Development&quot;,
+                        &quot;slug&quot;: &quot;web-development&quot;
+                    },
+                    &quot;skills&quot;: [
+                        {
+                            &quot;id&quot;: 1,
+                            &quot;name&quot;: &quot;PHP&quot;
+                        },
+                        {
+                            &quot;id&quot;: 2,
+                            &quot;name&quot;: &quot;Laravel&quot;
+                        }
+                    ]
+                }
+            ],
+            &quot;per_page&quot;: 15,
+            &quot;total&quot;: 1
+        }
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;You are unauthenticated , must register or login&quot;,
+    &quot;data&quot;: []
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-jobs" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-jobs"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-jobs"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-jobs" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-jobs">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-jobs" data-method="GET"
+      data-path="api/jobs"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-jobs', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-jobs"
+                    onclick="tryItOut('GETapi-jobs');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-jobs"
+                    onclick="cancelTryOut('GETapi-jobs');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-jobs"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/jobs</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-jobs"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-jobs"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>category_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="category_id"                data-endpoint="GETapi-jobs"
+               value="1"
+               data-component="query">
+    <br>
+<p>optional Filter by category ID. Example: <code>1</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>experience_level</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="experience_level"                data-endpoint="GETapi-jobs"
+               value="intermediate"
+               data-component="query">
+    <br>
+<p>optional Filter by experience level. Allowed: entry, intermediate, expert. Example: <code>intermediate</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>budget_min</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="budget_min"                data-endpoint="GETapi-jobs"
+               value="500"
+               data-component="query">
+    <br>
+<p>optional Show jobs whose budget_max is at least this value. Example: <code>500</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>budget_max</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="budget_max"                data-endpoint="GETapi-jobs"
+               value="3000"
+               data-component="query">
+    <br>
+<p>optional Show jobs whose budget_min is at most this value. Example: <code>3000</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>skill_ids</code></b>&nbsp;&nbsp;
+<small>integer[]</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="skill_ids[0]"                data-endpoint="GETapi-jobs"
+               data-component="query">
+        <input type="number" style="display: none"
+               name="skill_ids[1]"                data-endpoint="GETapi-jobs"
+               data-component="query">
+    <br>
+<p>optional Filter jobs requiring all given skill IDs.</p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>per_page</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="per_page"                data-endpoint="GETapi-jobs"
+               value="10"
+               data-component="query">
+    <br>
+<p>optional Results per page (1–50). Default: 15. Example: <code>10</code></p>
+            </div>
+                </form>
+
+                    <h2 id="job-discovery-GETapi-jobs--job_id-">Show a single open job.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Retrieves a specific job post. Only open jobs are publicly visible.
+Closed or non-existent jobs return 404.</p>
+
+<span id="example-requests-GETapi-jobs--job_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/jobs/1" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/jobs/1"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-jobs--job_id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Job retrieved successfully&quot;,
+    &quot;data&quot;: {
+        &quot;job&quot;: {
+            &quot;id&quot;: 1,
+            &quot;category_id&quot;: 1,
+            &quot;title&quot;: &quot;Build a Laravel REST API&quot;,
+            &quot;description&quot;: &quot;We need a skilled Laravel developer...&quot;,
+            &quot;budget_min&quot;: &quot;500.00&quot;,
+            &quot;budget_max&quot;: &quot;2000.00&quot;,
+            &quot;experience_level&quot;: &quot;intermediate&quot;,
+            &quot;deadline&quot;: &quot;2027-03-01&quot;,
+            &quot;status&quot;: &quot;open&quot;,
+            &quot;category&quot;: {
+                &quot;id&quot;: 1,
+                &quot;name&quot;: &quot;Web Development&quot;,
+                &quot;slug&quot;: &quot;web-development&quot;
+            },
+            &quot;skills&quot;: [
+                {
+                    &quot;id&quot;: 1,
+                    &quot;name&quot;: &quot;PHP&quot;
+                },
+                {
+                    &quot;id&quot;: 2,
+                    &quot;name&quot;: &quot;Laravel&quot;
+                }
+            ]
+        }
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;You are unauthenticated , must register or login&quot;,
+    &quot;data&quot;: []
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Resource not found&quot;,
+    &quot;data&quot;: []
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-jobs--job_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-jobs--job_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-jobs--job_id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-jobs--job_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-jobs--job_id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-jobs--job_id-" data-method="GET"
+      data-path="api/jobs/{job_id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-jobs--job_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-jobs--job_id-"
+                    onclick="tryItOut('GETapi-jobs--job_id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-jobs--job_id-"
+                    onclick="cancelTryOut('GETapi-jobs--job_id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-jobs--job_id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/jobs/{job_id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-jobs--job_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-jobs--job_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>job_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="job_id"                data-endpoint="GETapi-jobs--job_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the job. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>job</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="job"                data-endpoint="GETapi-jobs--job_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the job. Example: <code>1</code></p>
+            </div>
+                    </form>
 
             
 

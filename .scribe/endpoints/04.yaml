@@ -1,0 +1,244 @@
+name: 'Job Discovery'
+description: ''
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/jobs
+    metadata:
+      custom: []
+      groupName: 'Job Discovery'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Browse open jobs.'
+      description: |-
+        Returns a paginated list of all open job posts available for discovery.
+        Supports filtering by category, experience level, budget range, and required skills.
+        Draft and closed jobs are never returned.
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      category_id:
+        custom: []
+        name: category_id
+        description: 'optional Filter by category ID.'
+        required: false
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      experience_level:
+        custom: []
+        name: experience_level
+        description: 'optional Filter by experience level. Allowed: entry, intermediate, expert.'
+        required: false
+        example: intermediate
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      budget_min:
+        custom: []
+        name: budget_min
+        description: 'optional Show jobs whose budget_max is at least this value.'
+        required: false
+        example: 500.0
+        type: number
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      budget_max:
+        custom: []
+        name: budget_max
+        description: 'optional Show jobs whose budget_min is at most this value.'
+        required: false
+        example: 3000.0
+        type: number
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      skill_ids:
+        custom: []
+        name: skill_ids
+        description: 'optional Filter jobs requiring all given skill IDs.'
+        required: false
+        example:
+          - 1
+          - 2
+        type: 'integer[]'
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      per_page:
+        custom: []
+        name: per_page
+        description: 'optional Results per page (1–50). Default: 15.'
+        required: false
+        example: 10
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanQueryParameters:
+      category_id: 1
+      experience_level: intermediate
+      budget_min: 500.0
+      budget_max: 3000.0
+      skill_ids:
+        - 1
+        - 2
+      per_page: 10
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "message": "Open jobs retrieved successfully",
+            "data": {
+              "jobs": {
+                "current_page": 1,
+                "data": [
+                  {
+                    "id": 1,
+                    "category_id": 1,
+                    "title": "Build a Laravel REST API",
+                    "description": "We need a skilled Laravel developer...",
+                    "budget_min": "500.00",
+                    "budget_max": "2000.00",
+                    "experience_level": "intermediate",
+                    "deadline": "2027-03-01",
+                    "status": "open",
+                    "created_at": "2026-10-13T10:00:00.000000Z",
+                    "category": {"id": 1, "name": "Web Development", "slug": "web-development"},
+                    "skills": [{"id": 1, "name": "PHP"}, {"id": 2, "name": "Laravel"}]
+                  }
+                ],
+                "per_page": 15,
+                "total": 1
+              }
+            }
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 401
+        content: '{"message": "You are unauthenticated , must register or login", "data": []}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/jobs/{job_id}'
+    metadata:
+      custom: []
+      groupName: 'Job Discovery'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Show a single open job.'
+      description: |-
+        Retrieves a specific job post. Only open jobs are publicly visible.
+        Closed or non-existent jobs return 404.
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      job_id:
+        custom: []
+        name: job_id
+        description: 'The ID of the job.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      job:
+        custom: []
+        name: job
+        description: 'The ID of the job.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      job_id: 1
+      job: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "message": "Job retrieved successfully",
+            "data": {
+              "job": {
+                "id": 1,
+                "category_id": 1,
+                "title": "Build a Laravel REST API",
+                "description": "We need a skilled Laravel developer...",
+                "budget_min": "500.00",
+                "budget_max": "2000.00",
+                "experience_level": "intermediate",
+                "deadline": "2027-03-01",
+                "status": "open",
+                "category": {"id": 1, "name": "Web Development", "slug": "web-development"},
+                "skills": [{"id": 1, "name": "PHP"}, {"id": 2, "name": "Laravel"}]
+              }
+            }
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 401
+        content: '{"message": "You are unauthenticated , must register or login", "data": []}'
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 404
+        content: '{"message": "Resource not found", "data": []}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null

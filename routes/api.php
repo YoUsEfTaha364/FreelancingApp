@@ -6,6 +6,8 @@ use App\Http\Controllers\Profile\FreelancerProfileController;
 use App\Http\Controllers\Profile\FreelancerExperienceController;
 use App\Http\Controllers\Profile\FreelancerSkillController;
 use App\Http\Controllers\Profile\FreelancerLanguageController;
+use App\Http\Controllers\Api\Client\JobController as ClientJobController;
+use App\Http\Controllers\Api\JobController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -57,9 +59,11 @@ Route::middleware(["auth:sanctum", "freelancer"])
         // Languages
         Route::get("languages", [FreelancerLanguageController::class, "index"]);
         Route::put("languages", [FreelancerLanguageController::class, "update"]);
-
-
     });
+
+
+
+
 
 Route::middleware(["auth:sanctum", "client"])
     ->prefix("client")
@@ -70,4 +74,18 @@ Route::middleware(["auth:sanctum", "client"])
         Route::put("profile", [ClientProfileController::class, "update"]);
 
 
+        // Jobs
+        Route::get("jobs", [ClientJobController::class, "index"]);
+        Route::post("jobs", [ClientJobController::class, "store"]);
+        Route::get("jobs/{job}", [ClientJobController::class, "show"]);
+        Route::patch("jobs/{job}", [ClientJobController::class, "update"]);
+        Route::patch("jobs/{job}/status", [ClientJobController::class, "changeStatus"]);
+        Route::delete("jobs/{job}", [ClientJobController::class, "destroy"]);
     });
+
+
+// Public job discovery (any authenticated user)
+Route::middleware("auth:sanctum")->group(function () {
+    Route::get("jobs", [JobController::class, "index"]);
+    Route::get("jobs/{job}", [JobController::class, "show"]);
+});
