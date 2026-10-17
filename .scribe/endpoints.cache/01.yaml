@@ -1128,7 +1128,7 @@ endpoints:
         name: 'languages[].proficiency'
         description: ''
         required: true
-        example: fluent
+        example: native
         type: string
         enumValues:
           - beginner

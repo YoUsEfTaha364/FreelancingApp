@@ -3,44 +3,57 @@
 use App\Http\Middleware\ClientMiddlewar;
 use App\Http\Middleware\FreelancerMiddlewar;
 use App\Services\ResponseService;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
-        web: __DIR__.'/../routes/web.php',
-        api: __DIR__.'/../routes/api.php',
-        commands: __DIR__.'/../routes/console.php',
+        web: __DIR__ . '/../routes/web.php',
+        api: __DIR__ . '/../routes/api.php',
+        commands: __DIR__ . '/../routes/console.php',
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->alias(["freelancer"=>FreelancerMiddlewar::class,"client"=>ClientMiddlewar::class]);
+        $middleware->alias(["freelancer" => FreelancerMiddlewar::class, "client" => ClientMiddlewar::class]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
 
 
 
-         $exceptions->render(function (
-        NotFoundHttpException $e,
-        Request $request
-    ) {
-         if ($request->is('api/*')) {
-            return ResponseService::Response([],404,"Resource not found");
-        }
+        $exceptions->render(function (
+            NotFoundHttpException $e,
+            Request $request
+        ) {
+            if ($request->is('api/*')) {
+                return ResponseService::Response([], 404, "Resource not found");
+            }
         });
 
 
-    $exceptions->render(function (
-        AuthenticationException $e,
-        Request $request
-    ) {
-        if ($request->is('api/*')) {
-         return ResponseService::Response([], 401, "You are unauthenticated , must register or login");
+        $exceptions->render(function (
+            AuthenticationException $e,
+            Request $request
+        ) {
+            if ($request->is('api/*')) {
+                return ResponseService::Response([], 401, "You are unauthenticated , must register or login");
+            }
+        });
 
-        }
-    });
+        $exceptions->render(
+            function (AccessDeniedHttpException $e, Request $request) {
+                if ($request->is('api/*')) {
+                    return ResponseService::Response([],
+                        403
+                        , 'You are unauthorized.');
+                }
+
+                return null;
+            }
+        );
     })->create();

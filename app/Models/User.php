@@ -7,6 +7,7 @@ namespace App\Models;
 use App\Enums\UserRole;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -55,7 +56,13 @@ class User extends Authenticatable
     public function freelancerProfile(){
         return $this->hasOne(freelancerProfile::class);
     }
+
     public function clientProfile(){
         return $this->hasOne(ClientProfile::class);
+    }
+
+    public function jobs(): HasMany
+    {
+        return $this->hasMany(Job::class);
     }
 }
