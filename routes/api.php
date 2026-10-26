@@ -7,6 +7,9 @@ use App\Http\Controllers\Profile\FreelancerExperienceController;
 use App\Http\Controllers\Profile\FreelancerSkillController;
 use App\Http\Controllers\Profile\FreelancerLanguageController;
 use App\Http\Controllers\Api\Client\JobController as ClientJobController;
+use App\Http\Controllers\Api\Client\ProposalController as ClientProposalController;
+use App\Http\Controllers\Api\Freelancer\ProposalController;
+use App\Http\Controllers\Api\Freelancer\NegotiationController;
 use App\Http\Controllers\Api\JobController;
 
 use Illuminate\Http\Request;
@@ -59,6 +62,41 @@ Route::middleware(["auth:sanctum", "freelancer"])
         // Languages
         Route::get("languages", [FreelancerLanguageController::class, "index"]);
         Route::put("languages", [FreelancerLanguageController::class, "update"]);
+
+
+        //proposals
+
+        Route::prefix("proposals")->group(function () {
+            Route::post("/", [ProposalController::class, "store"]);
+            Route::get("/", [ProposalController::class, "index"]);
+            Route::get("/{proposal}", [ProposalController::class, "show"]);
+
+            Route::patch('/{proposal}', [
+                ProposalController::class,
+                'update',
+            ]);
+
+            Route::patch('/{proposal}/withdraw', [
+                ProposalController::class,
+                'withdraw',
+            ]);
+
+            // Negotiations
+            Route::get('/{proposal}/negotiations', [
+                NegotiationController::class,
+                'index',
+            ]);
+
+            Route::get('/{proposal}/negotiations/{negotiation}', [
+                NegotiationController::class,
+                'show',
+            ]);
+
+            Route::patch('/{proposal}/negotiations/{negotiation}/accept', [
+                NegotiationController::class,
+                'accept',
+            ]);
+        });
     });
 
 
@@ -81,6 +119,12 @@ Route::middleware(["auth:sanctum", "client"])
         Route::patch("jobs/{job}", [ClientJobController::class, "update"]);
         Route::patch("jobs/{job}/status", [ClientJobController::class, "changeStatus"]);
         Route::delete("jobs/{job}", [ClientJobController::class, "destroy"]);
+
+        //proposals
+
+        Route::get("jobs/{job}/proposals", [ClientProposalController::class, "index"]);
+        Route::get("jobs/{job}/proposals/{proposal}", [ClientProposalController::class, "show"]);
+        Route::post("jobs/{job}/proposals/{proposal}/negotiations", [ClientProposalController::class, "storeNegotiation"]);
     });
 
 

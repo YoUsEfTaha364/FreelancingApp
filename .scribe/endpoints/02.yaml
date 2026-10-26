@@ -1,19 +1,130 @@
-name: 'Client Profile'
+name: 'Freelancer - Proposals'
 description: ''
 endpoints:
   -
     custom: []
     httpMethods:
-      - GET
-    uri: api/client/profile
+      - POST
+    uri: api/freelancer/proposals
     metadata:
       custom: []
-      groupName: 'Client Profile'
+      groupName: 'Freelancer - Proposals'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Get client profile'
-      description: "Retrieve the authenticated client's profile information."
+      title: 'Submit a proposal'
+      description: 'Submit a proposal for a job as the authenticated freelancer.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      job_id:
+        custom: []
+        name: job_id
+        description: 'The ID of the job.'
+        required: true
+        example: 12
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      bid_amount:
+        custom: []
+        name: bid_amount
+        description: 'The requested project price. Must be positive.'
+        required: true
+        example: 500.0
+        type: number
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      cover_letter:
+        custom: []
+        name: cover_letter
+        description: "The freelancer's cover letter."
+        required: true
+        example: 'I have experience building similar applications.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      estimated_duration:
+        custom: []
+        name: estimated_duration
+        description: 'nullable Estimated project duration.'
+        required: false
+        example: 14
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+    cleanBodyParameters:
+      job_id: 12
+      bid_amount: 500.0
+      cover_letter: 'I have experience building similar applications.'
+      estimated_duration: 14
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 201
+        content: |-
+          {
+            "success": true,
+            "message": "proposal send successfully",
+            "data": {
+              "proposal": {
+                "id": 5,
+                "job_id": 12,
+                "bid_amount": "500.00",
+                "estimated_duration": 14,
+                "cover_letter": "I have experience building similar applications.",
+                "status": "pending"
+              }
+            }
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "message": "The given data was invalid.",
+            "errors": {
+              "bid_amount": ["The bid amount field is required."]
+            }
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/freelancer/proposals
+    metadata:
+      custom: []
+      groupName: 'Freelancer - Proposals'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List my proposals'
+      description: 'Retrieve all proposals submitted by the authenticated freelancer.'
       authenticated: true
       deprecated: false
     headers:
@@ -32,30 +143,21 @@ endpoints:
         status: 200
         content: |-
           {
-            "message": "Client profile retrieved successfully",
+            "success": true,
+            "message": "Get freelancer proposals",
             "data": {
-              "profile": {
-                "id": 1,
-                "user_id": 5,
-                "company_name": "Tech Solutions",
-                "phone": "01012345678",
-                "country": "Egypt",
-                "city": "Cairo"
-              }
+              "proposals": [
+                {
+                  "id": 5,
+                  "job-title": "E-commerce Website",
+                  "job-description": "Build an online store.",
+                  "bid_amount": "500.00",
+                  "cover_letter": "I can build your website.",
+                  "status": "pending"
+                }
+              ]
             }
           }
-        headers: []
-        description: ''
-      -
-        custom: []
-        status: 401
-        content: '{"message": "Unauthenticated.", "data": []}'
-        headers: []
-        description: ''
-      -
-        custom: []
-        status: 404
-        content: '{"message": "Client profile not found", "data": []}'
         headers: []
         description: ''
     responseFields: []
@@ -66,75 +168,51 @@ endpoints:
   -
     custom: []
     httpMethods:
-      - PUT
-    uri: api/client/profile
+      - GET
+    uri: 'api/freelancer/proposals/{proposal_id}'
     metadata:
       custom: []
-      groupName: 'Client Profile'
+      groupName: 'Freelancer - Proposals'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Update client profile'
-      description: "Update the authenticated client's profile information."
+      title: 'Get my proposal'
+      description: 'Retrieve details of a proposal owned by the authenticated freelancer.'
       authenticated: true
       deprecated: false
     headers:
       Content-Type: application/json
       Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
+    urlParameters:
+      proposal_id:
+        custom: []
+        name: proposal_id
+        description: 'The ID of the proposal.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      proposal:
+        custom: []
+        name: proposal
+        description: 'The ID of the proposal.'
+        required: true
+        example: 5
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      proposal_id: 17
+      proposal: 5
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters:
-      company_name:
-        custom: []
-        name: company_name
-        description: 'nullable The company name.'
-        required: false
-        example: 'Tech Solutions'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        deprecated: false
-      phone:
-        custom: []
-        name: phone
-        description: 'nullable Egyptian mobile number.'
-        required: false
-        example: '01012345678'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      country:
-        custom: []
-        name: country
-        description: 'nullable The country.'
-        required: false
-        example: Egypt
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      city:
-        custom: []
-        name: city
-        description: 'nullable The city.'
-        required: false
-        example: Cairo
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-    cleanBodyParameters:
-      company_name: 'Tech Solutions'
-      phone: '01012345678'
-      country: Egypt
-      city: Cairo
+    bodyParameters: []
+    cleanBodyParameters: []
     fileParameters: []
     responses:
       -
@@ -142,15 +220,16 @@ endpoints:
         status: 200
         content: |-
           {
-            "message": "Client profile updated successfully",
+            "success": true,
+            "message": "Get a proposal",
             "data": {
-              "profile": {
-                "id": 1,
-                "user_id": 5,
-                "company_name": "Tech Solutions",
-                "phone": "01012345678",
-                "country": "Egypt",
-                "city": "Cairo"
+              "proposals": {
+                "id": 5,
+                "job-title": "E-commerce Website",
+                "job-description": "Build an online store.",
+                "bid_amount": "500.00",
+                "cover_letter": "I can build your website.",
+                "status": "pending"
               }
             }
           }
@@ -158,20 +237,241 @@ endpoints:
         description: ''
       -
         custom: []
-        status: 401
-        content: '{"message": "You are unauthorized", "data": []}'
+        status: 403
+        content: |-
+          {
+            "message": "This action is unauthorized."
+          }
         headers: []
         description: ''
       -
         custom: []
         status: 404
-        content: '{"message": "Client profile not found", "data": []}'
+        content: |-
+          {
+            "message": "Not Found"
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PATCH
+    uri: 'api/freelancer/proposals/{proposal_id}'
+    metadata:
+      custom: []
+      groupName: 'Freelancer - Proposals'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update my proposal'
+      description: |-
+        Update an existing proposal owned by the authenticated freelancer.
+        Only proposals with pending status can be updated.
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      proposal_id:
+        custom: []
+        name: proposal_id
+        description: 'The ID of the proposal.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      proposal:
+        custom: []
+        name: proposal
+        description: 'The ID of the proposal.'
+        required: true
+        example: 5
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      proposal_id: 17
+      proposal: 5
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      cover_letter:
+        custom: []
+        name: cover_letter
+        description: 'optional The updated cover letter.'
+        required: false
+        example: 'I can deliver additional features.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      estimated_duration:
+        custom: []
+        name: estimated_duration
+        description: 'nullable The updated estimated duration.'
+        required: false
+        example: 20
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      bid_amount:
+        custom: []
+        name: bid_amount
+        description: 'optional The updated requested price.'
+        required: false
+        example: 600.0
+        type: number
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      cover_letter: 'I can deliver additional features.'
+      estimated_duration: 20
+      bid_amount: 600.0
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Proposal updated successfully.",
+            "data": {
+              "proposal": {
+                "id": 5,
+                "bid_amount": "600.00",
+                "estimated_duration": 20,
+                "cover_letter": "I can deliver additional features.",
+                "status": "pending"
+              }
+            }
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 403
+        content: |-
+          {
+            "message": "This action is unauthorized."
+          }
         headers: []
         description: ''
       -
         custom: []
         status: 422
-        content: '{"message": "validation errors", "data": {"phone": ["The phone format is invalid."]}}'
+        content: |-
+          {
+            "message": "Only pending proposals can be updated."
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PATCH
+    uri: 'api/freelancer/proposals/{proposal_id}/withdraw'
+    metadata:
+      custom: []
+      groupName: 'Freelancer - Proposals'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Withdraw my proposal'
+      description: |-
+        Withdraw a previously submitted proposal.
+        Only proposals with pending status can be withdrawn.
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      proposal_id:
+        custom: []
+        name: proposal_id
+        description: 'The ID of the proposal.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      proposal:
+        custom: []
+        name: proposal
+        description: 'The ID of the proposal.'
+        required: true
+        example: 5
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      proposal_id: 17
+      proposal: 5
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Proposal withdrawn successfully.",
+            "data": {
+              "proposal": {
+                "id": 5,
+                "status": "withdrawn"
+              }
+            }
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 403
+        content: |-
+          {
+            "message": "This action is unauthorized."
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "message": "Only pending proposals can be withdrawn."
+          }
         headers: []
         description: ''
     responseFields: []
