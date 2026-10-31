@@ -65,4 +65,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Job::class);
     }
+
+     public function proposals(){
+        return $this->hasMany(Proposal::class,"freelancer_id");
+    }
 }

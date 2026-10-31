@@ -1,44 +1,68 @@
-name: 'Client Jobs'
+name: 'Freelancer - Negotiations'
 description: ''
 endpoints:
   -
     custom: []
     httpMethods:
       - GET
-    uri: api/client/jobs
+    uri: 'api/freelancer/proposals/{proposal_id}/negotiations'
     metadata:
       custom: []
-      groupName: 'Client Jobs'
+      groupName: 'Freelancer - Negotiations'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: "List the authenticated client's jobs."
+      title: 'List proposal negotiations'
       description: |-
-        Returns a paginated list of all jobs posted by the authenticated client.
-        Supports optional filtering by status and category.
+        Retrieve paginated negotiations associated with a proposal owned
+        by the authenticated freelancer. Results can be filtered by status.
       authenticated: true
       deprecated: false
     headers:
       Content-Type: application/json
       Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
+    urlParameters:
+      proposal_id:
+        custom: []
+        name: proposal_id
+        description: 'The ID of the proposal.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      proposal:
+        custom: []
+        name: proposal
+        description: "The ID of the freelancer's proposal."
+        required: true
+        example: 12
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      proposal_id: 17
+      proposal: 12
     queryParameters:
       status:
         custom: []
         name: status
-        description: 'optional Filter by status. Allowed: open, closed.'
+        description: 'Filter negotiations by status. Allowed values: pending, accepted, rejected, superseded, withdrawn.'
         required: false
-        example: open
+        example: pending
         type: string
         enumValues: []
         exampleWasSpecified: true
         nullable: false
         deprecated: false
-      category_id:
+      page:
         custom: []
-        name: category_id
-        description: 'optional Filter by category ID.'
+        name: page
+        description: 'The pagination page number.'
         required: false
         example: 1
         type: integer
@@ -46,23 +70,28 @@ endpoints:
         exampleWasSpecified: true
         nullable: false
         deprecated: false
-      per_page:
+    cleanQueryParameters:
+      status: pending
+      page: 1
+    bodyParameters:
+      status:
         custom: []
-        name: per_page
-        description: 'optional Results per page (1–50). Default: 15.'
+        name: status
+        description: ''
         required: false
-        example: 10
-        type: integer
-        enumValues: []
-        exampleWasSpecified: true
+        example: rejected
+        type: string
+        enumValues:
+          - pending
+          - accepted
+          - rejected
+          - superseded
+          - withdrawn
+        exampleWasSpecified: false
         nullable: false
         deprecated: false
-    cleanQueryParameters:
-      status: open
-      category_id: 1
-      per_page: 10
-    bodyParameters: []
-    cleanBodyParameters: []
+    cleanBodyParameters:
+      status: rejected
     fileParameters: []
     responses:
       -
@@ -70,30 +99,27 @@ endpoints:
         status: 200
         content: |-
           {
-            "message": "Client jobs retrieved successfully",
+            "success": true,
+            "message": "Negotiations retrieved successfully.",
             "data": {
-              "jobs": {
+              "negotiations": [
+                {
+                  "id": 8,
+                  "proposal_id": 12,
+                  "proposed_by": 3,
+                  "proposed_amount": "400.00",
+                  "message": "My budget is 400.",
+                  "status": "pending",
+                  "responded_at": null
+                }
+              ],
+              "pagination": {
                 "current_page": 1,
-                "data": [
-                  {
-                    "id": 1,
-                    "user_id": 3,
-                    "category_id": 1,
-                    "title": "Build a Laravel REST API",
-                    "description": "We need a skilled Laravel developer...",
-                    "budget_min": "500.00",
-                    "budget_max": "2000.00",
-                    "experience_level": "intermediate",
-                    "deadline": "2027-03-01",
-                    "status": "open",
-                    "created_at": "2026-10-13T10:00:00.000000Z",
-                    "updated_at": "2026-10-13T10:00:00.000000Z",
-                    "category": {"id": 1, "name": "Web Development", "slug": "web-development"},
-                    "skills": [{"id": 1, "name": "PHP"}, {"id": 2, "name": "Laravel"}]
-                  }
-                ],
                 "per_page": 15,
-                "total": 1
+                "total": 1,
+                "last_page": 1,
+                "next_page_url": null,
+                "prev_page_url": null
               }
             }
           }
@@ -101,174 +127,11 @@ endpoints:
         description: ''
       -
         custom: []
-        status: 401
-        content: '{"message": "You are unauthenticated , must register or login", "data": []}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - POST
-    uri: api/client/jobs
-    metadata:
-      custom: []
-      groupName: 'Client Jobs'
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Create a job post.'
-      description: |-
-        Creates a new job post owned by the authenticated client.
-        The user_id and initial status are set server-side.
-      authenticated: true
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      title:
-        custom: []
-        name: title
-        description: 'Job title. Max 255 characters.'
-        required: true
-        example: 'Build a Laravel REST API'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      description:
-        custom: []
-        name: description
-        description: 'Detailed job description. Max 5000 characters.'
-        required: true
-        example: 'We need a skilled Laravel developer to build a REST API.'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      category_id:
-        custom: []
-        name: category_id
-        description: 'Existing category ID.'
-        required: true
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      budget_min:
-        custom: []
-        name: budget_min
-        description: 'nullable Minimum budget in USD.'
-        required: false
-        example: 500.0
-        type: number
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        deprecated: false
-      budget_max:
-        custom: []
-        name: budget_max
-        description: 'nullable Maximum budget in USD (>= budget_min).'
-        required: false
-        example: 2000.0
-        type: number
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        deprecated: false
-      experience_level:
-        custom: []
-        name: experience_level
-        description: 'Required experience level. Allowed: entry, intermediate, expert.'
-        required: true
-        example: intermediate
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      deadline:
-        custom: []
-        name: deadline
-        description: 'nullable Optional project deadline (must be in the future).'
-        required: false
-        example: '2027-03-01'
-        type: date
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        deprecated: false
-      skill_ids:
-        custom: []
-        name: skill_ids
-        description: 'nullable Optional array of existing skill IDs.'
-        required: false
-        example:
-          - 1
-          - 2
-          - 3
-        type: 'integer[]'
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-    cleanBodyParameters:
-      title: 'Build a Laravel REST API'
-      description: 'We need a skilled Laravel developer to build a REST API.'
-      category_id: 1
-      budget_min: 500.0
-      budget_max: 2000.0
-      experience_level: intermediate
-      deadline: '2027-03-01'
-      skill_ids:
-        - 1
-        - 2
-        - 3
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 201
+        status: 403
         content: |-
           {
-            "message": "Job created successfully",
-            "data": {
-              "job": {
-                "id": 1,
-                "user_id": 3,
-                "category_id": 1,
-                "title": "Build a Laravel REST API",
-                "description": "We need a skilled Laravel developer...",
-                "budget_min": "500.00",
-                "budget_max": "2000.00",
-                "experience_level": "intermediate",
-                "deadline": "2027-03-01",
-                "status": "open",
-                "category": {"id": 1, "name": "Web Development", "slug": "web-development"},
-                "skills": [{"id": 1, "name": "PHP"}, {"id": 2, "name": "Laravel"}]
-              }
-            }
+            "message": "You are not authorized to access this proposal."
           }
-        headers: []
-        description: ''
-      -
-        custom: []
-        status: 401
-        content: '{"message": "You are unauthenticated , must register or login", "data": []}'
         headers: []
         description: ''
       -
@@ -276,10 +139,11 @@ endpoints:
         status: 422
         content: |-
           {
-            "message": "Validation errors",
-            "data": {
-              "title": ["The title field is required."],
-              "budget_max": ["The budget max must be greater than or equal to budget min."]
+            "message": "The given data was invalid.",
+            "errors": {
+              "status": [
+                "The selected status is invalid."
+              ]
             }
           }
         headers: []
@@ -293,46 +157,72 @@ endpoints:
     custom: []
     httpMethods:
       - GET
-    uri: 'api/client/jobs/{job_id}'
+    uri: 'api/freelancer/proposals/{proposal_id}/negotiations/{negotiation_id}'
     metadata:
       custom: []
-      groupName: 'Client Jobs'
+      groupName: 'Freelancer - Negotiations'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: "Show one of the client's jobs."
-      description: 'Retrieves a specific job post belonging to the authenticated client.'
+      title: 'Show a proposal negotiation'
+      description: |-
+        Retrieve a specific negotiation belonging to a proposal owned
+        by the authenticated freelancer.
       authenticated: true
       deprecated: false
     headers:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      job_id:
+      proposal_id:
         custom: []
-        name: job_id
-        description: 'The ID of the job.'
+        name: proposal_id
+        description: 'The ID of the proposal.'
         required: true
-        example: 1
+        example: 17
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-      job:
+      negotiation_id:
         custom: []
-        name: job
-        description: 'The ID of the job.'
+        name: negotiation_id
+        description: 'The ID of the negotiation.'
         required: true
-        example: 1
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      proposal:
+        custom: []
+        name: proposal
+        description: "The ID of the freelancer's proposal."
+        required: true
+        example: 12
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      negotiation:
+        custom: []
+        name: negotiation
+        description: 'The ID of the negotiation.'
+        required: true
+        example: 8
         type: integer
         enumValues: []
         exampleWasSpecified: true
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      job_id: 1
-      job: 1
+      proposal_id: 17
+      negotiation_id: 17
+      proposal: 12
+      negotiation: 8
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -344,21 +234,17 @@ endpoints:
         status: 200
         content: |-
           {
-            "message": "Job retrieved successfully",
+            "success": true,
+            "message": "Negotiation retrieved successfully.",
             "data": {
-              "job": {
-                "id": 1,
-                "user_id": 3,
-                "category_id": 1,
-                "title": "Build a Laravel REST API",
-                "description": "We need a skilled Laravel developer...",
-                "budget_min": "500.00",
-                "budget_max": "2000.00",
-                "experience_level": "intermediate",
-                "deadline": "2027-03-01",
-                "status": "open",
-                "category": {"id": 1, "name": "Web Development", "slug": "web-development"},
-                "skills": [{"id": 1, "name": "PHP"}]
+              "negotiation": {
+                "id": 8,
+                "proposal_id": 12,
+                "proposed_by": 3,
+                "proposed_amount": "400.00",
+                "message": "My budget is 400.",
+                "status": "pending",
+                "responded_at": null
               }
             }
           }
@@ -366,20 +252,20 @@ endpoints:
         description: ''
       -
         custom: []
-        status: 401
-        content: '{"message": "You are unauthenticated , must register or login", "data": []}'
-        headers: []
-        description: ''
-      -
-        custom: []
         status: 403
-        content: '{"message": "This action is unauthorized.", "data": []}'
+        content: |-
+          {
+            "message": "You are not authorized to access this proposal."
+          }
         headers: []
         description: ''
       -
         custom: []
         status: 404
-        content: '{"message": "Resource not found", "data": []}'
+        content: |-
+          {
+            "message": "Negotiation not found for this proposal."
+          }
         headers: []
         description: ''
     responseFields: []
@@ -391,348 +277,74 @@ endpoints:
     custom: []
     httpMethods:
       - PATCH
-    uri: 'api/client/jobs/{job_id}'
+    uri: 'api/freelancer/proposals/{proposal_id}/negotiations/{negotiation_id}/accept'
     metadata:
       custom: []
-      groupName: 'Client Jobs'
+      groupName: 'Freelancer - Negotiations'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Update a job post.'
+      title: 'Accept a counteroffer'
       description: |-
-        Partially updates an existing job. Only the supplied fields are changed.
-        When skill_ids is omitted, skills remain unchanged.
-        When an empty array is supplied for skill_ids, all skills are removed.
+        Accept a pending counteroffer created by the client.
+        The negotiation is marked as accepted, the agreed amount is saved
+        on the proposal, and the proposal status becomes accepted.
+        Other pending negotiations for the same proposal are superseded.
       authenticated: true
       deprecated: false
     headers:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      job_id:
+      proposal_id:
         custom: []
-        name: job_id
-        description: 'The ID of the job.'
+        name: proposal_id
+        description: 'The ID of the proposal.'
         required: true
-        example: 1
+        example: 17
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-      job:
+      negotiation_id:
         custom: []
-        name: job
-        description: 'The ID of the job.'
+        name: negotiation_id
+        description: 'The ID of the negotiation.'
         required: true
-        example: 1
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      proposal:
+        custom: []
+        name: proposal
+        description: "The ID of the freelancer's proposal."
+        required: true
+        example: 12
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      negotiation:
+        custom: []
+        name: negotiation
+        description: 'The ID of the negotiation.'
+        required: true
+        example: 8
         type: integer
         enumValues: []
         exampleWasSpecified: true
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      job_id: 1
-      job: 1
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      title:
-        custom: []
-        name: title
-        description: 'optional Job title. Max 255 characters.'
-        required: false
-        example: 'Build a React Dashboard'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      description:
-        custom: []
-        name: description
-        description: 'optional Updated job description.'
-        required: false
-        example: 'New description.'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      category_id:
-        custom: []
-        name: category_id
-        description: 'optional Existing category ID.'
-        required: false
-        example: 2
-        type: integer
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      budget_min:
-        custom: []
-        name: budget_min
-        description: 'nullable Minimum budget in USD.'
-        required: false
-        example: 300.0
-        type: number
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        deprecated: false
-      budget_max:
-        custom: []
-        name: budget_max
-        description: 'nullable Maximum budget in USD.'
-        required: false
-        example: 1500.0
-        type: number
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        deprecated: false
-      experience_level:
-        custom: []
-        name: experience_level
-        description: 'optional Allowed: entry, intermediate, expert.'
-        required: false
-        example: expert
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      deadline:
-        custom: []
-        name: deadline
-        description: 'nullable Project deadline (future date).'
-        required: false
-        example: '2027-06-01'
-        type: date
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        deprecated: false
-      skill_ids:
-        custom: []
-        name: skill_ids
-        description: 'nullable Omit to leave unchanged. Empty array removes all skills.'
-        required: false
-        example:
-          - 1
-          - 4
-        type: 'integer[]'
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-    cleanBodyParameters:
-      title: 'Build a React Dashboard'
-      description: 'New description.'
-      category_id: 2
-      budget_min: 300.0
-      budget_max: 1500.0
-      experience_level: expert
-      deadline: '2027-06-01'
-      skill_ids:
-        - 1
-        - 4
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: |-
-          {
-            "message": "Job updated successfully",
-            "data": {
-              "job": {
-                "id": 1,
-                "title": "Build a React Dashboard",
-                "status": "open",
-                "category": {"id": 2, "name": "UI/UX Design", "slug": "ui-ux-design"},
-                "skills": [{"id": 1, "name": "PHP"}]
-              }
-            }
-          }
-        headers: []
-        description: ''
-      -
-        custom: []
-        status: 403
-        content: '{"message": "This action is unauthorized.", "data": []}'
-        headers: []
-        description: ''
-      -
-        custom: []
-        status: 404
-        content: '{"message": "Resource not found", "data": []}'
-        headers: []
-        description: ''
-      -
-        custom: []
-        status: 422
-        content: '{"message": "Validation errors", "data": {"budget_max": ["The budget max must be greater than or equal to budget min."]}}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - PATCH
-    uri: 'api/client/jobs/{job_id}/status'
-    metadata:
-      custom: []
-      groupName: 'Client Jobs'
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'change a job post status.'
-      description: |-
-        Changes the job status to 'closed'. Only the owner can close a job.
-        A job that is already closed cannot be closed again.
-        Changes the job status to 'closed'. Only the owner can close a job.
-        A job that is already closed cannot be closed again.
-      authenticated: true
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      job_id:
-        custom: []
-        name: job_id
-        description: 'The ID of the job.'
-        required: true
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      job:
-        custom: []
-        name: job
-        description: 'The ID of the job to close.'
-        required: true
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      job_id: 1
-      job: 1
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      status:
-        custom: []
-        name: status
-        description: 'status , must be string closed or opened .'
-        required: true
-        example: opened
-        type: string
-        enumValues:
-          - closed
-          - opened
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanBodyParameters:
-      status: opened
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: |-
-          {
-            "message": "Job closed successfully",
-            "data": {
-              "job": {
-                "id": 1,
-                "status": "closed"
-              }
-            }
-          }
-        headers: []
-        description: ''
-      -
-        custom: []
-        status: 403
-        content: '{"message": "This action is unauthorized.", "data": []}'
-        headers: []
-        description: ''
-      -
-        custom: []
-        status: 404
-        content: '{"message": "Resource not found", "data": []}'
-        headers: []
-        description: ''
-      -
-        custom: []
-        status: 422
-        content: '{"message": "Job is already closed.", "data": []}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - DELETE
-    uri: 'api/client/jobs/{job_id}'
-    metadata:
-      custom: []
-      groupName: 'Client Jobs'
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Delete a job post.'
-      description: |-
-        Permanently deletes a job post owned by the authenticated client.
-        Associated skill links are removed via cascade.
-      authenticated: true
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      job_id:
-        custom: []
-        name: job_id
-        description: 'The ID of the job.'
-        required: true
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      job:
-        custom: []
-        name: job
-        description: 'The ID of the job to delete.'
-        required: true
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      job_id: 1
-      job: 1
+      proposal_id: 17
+      negotiation_id: 17
+      proposal: 12
+      negotiation: 8
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -742,19 +354,56 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"message": "Job deleted successfully", "data": []}'
+        content: |-
+          {
+            "success": true,
+            "message": "Counteroffer accepted successfully.",
+            "data": {
+              "negotiation": {
+                "id": 8,
+                "proposal_id": 12,
+                "proposed_amount": "400.00",
+                "status": "accepted"
+              },
+              "proposal": {
+                "id": 12,
+                "agreed_amount": "400.00",
+                "status": "accepted"
+              }
+            }
+          }
         headers: []
         description: ''
       -
         custom: []
         status: 403
-        content: '{"message": "This action is unauthorized.", "data": []}'
+        content: |-
+          {
+            "message": "You are not authorized to access this proposal."
+          }
         headers: []
         description: ''
       -
         custom: []
         status: 404
-        content: '{"message": "Resource not found", "data": []}'
+        content: |-
+          {
+            "message": "Negotiation not found for this proposal."
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "message": "The given data was invalid.",
+            "errors": {
+              "negotiation": [
+                "This negotiation is no longer available for acceptance."
+              ]
+            }
+          }
         headers: []
         description: ''
     responseFields: []

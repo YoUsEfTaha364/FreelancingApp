@@ -85,6 +85,28 @@
                             </li>
                                                                         </ul>
                             </ul>
+                    <ul id="tocify-header-client-proposals" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="client-proposals">
+                    <a href="#client-proposals">Client - Proposals</a>
+                </li>
+                                    <ul id="tocify-subheader-client-proposals" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="client-proposals-GETapi-client-jobs--job_id--proposals">
+                                <a href="#client-proposals-GETapi-client-jobs--job_id--proposals">Get job proposals</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="client-proposals-GETapi-client-jobs--job_id--proposals--proposal_id-">
+                                <a href="#client-proposals-GETapi-client-jobs--job_id--proposals--proposal_id-">Get job proposal</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="client-proposals-PATCHapi-client-jobs--job_id--proposals--proposal_id--accept">
+                                <a href="#client-proposals-PATCHapi-client-jobs--job_id--proposals--proposal_id--accept">Accept a proposal</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="client-proposals-PATCHapi-client-jobs--job_id--proposals--proposal_id--reject">
+                                <a href="#client-proposals-PATCHapi-client-jobs--job_id--proposals--proposal_id--reject">Reject a proposal</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="client-proposals-POSTapi-client-jobs--job_id--proposals--proposal_id--negotiations">
+                                <a href="#client-proposals-POSTapi-client-jobs--job_id--proposals--proposal_id--negotiations">Create negotiation</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
                     <ul id="tocify-header-client-jobs" class="tocify-header">
                 <li class="tocify-item level-1" data-unique="client-jobs">
                     <a href="#client-jobs">Client Jobs</a>
@@ -120,6 +142,44 @@
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="client-profile-PUTapi-client-profile">
                                 <a href="#client-profile-PUTapi-client-profile">Update client profile</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+                    <ul id="tocify-header-freelancer-negotiations" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="freelancer-negotiations">
+                    <a href="#freelancer-negotiations">Freelancer - Negotiations</a>
+                </li>
+                                    <ul id="tocify-subheader-freelancer-negotiations" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="freelancer-negotiations-GETapi-freelancer-proposals--proposal_id--negotiations">
+                                <a href="#freelancer-negotiations-GETapi-freelancer-proposals--proposal_id--negotiations">List proposal negotiations</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="freelancer-negotiations-GETapi-freelancer-proposals--proposal_id--negotiations--negotiation_id-">
+                                <a href="#freelancer-negotiations-GETapi-freelancer-proposals--proposal_id--negotiations--negotiation_id-">Show a proposal negotiation</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="freelancer-negotiations-PATCHapi-freelancer-proposals--proposal_id--negotiations--negotiation_id--accept">
+                                <a href="#freelancer-negotiations-PATCHapi-freelancer-proposals--proposal_id--negotiations--negotiation_id--accept">Accept a counteroffer</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+                    <ul id="tocify-header-freelancer-proposals" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="freelancer-proposals">
+                    <a href="#freelancer-proposals">Freelancer - Proposals</a>
+                </li>
+                                    <ul id="tocify-subheader-freelancer-proposals" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="freelancer-proposals-POSTapi-freelancer-proposals">
+                                <a href="#freelancer-proposals-POSTapi-freelancer-proposals">Submit a proposal</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="freelancer-proposals-GETapi-freelancer-proposals">
+                                <a href="#freelancer-proposals-GETapi-freelancer-proposals">List my proposals</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="freelancer-proposals-GETapi-freelancer-proposals--proposal_id-">
+                                <a href="#freelancer-proposals-GETapi-freelancer-proposals--proposal_id-">Get my proposal</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="freelancer-proposals-PATCHapi-freelancer-proposals--proposal_id-">
+                                <a href="#freelancer-proposals-PATCHapi-freelancer-proposals--proposal_id-">Update my proposal</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="freelancer-proposals-PATCHapi-freelancer-proposals--proposal_id--withdraw">
+                                <a href="#freelancer-proposals-PATCHapi-freelancer-proposals--proposal_id--withdraw">Withdraw my proposal</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -185,7 +245,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: October 15, 2026</li>
+        <li>Last updated: October 26, 2026</li>
     </ul>
 </div>
 
@@ -865,6 +925,1065 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>Example: <code>application/json</code></p>
             </div>
                         </form>
+
+                <h1 id="client-proposals">Client - Proposals</h1>
+
+    
+
+                                <h2 id="client-proposals-GETapi-client-jobs--job_id--proposals">Get job proposals</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Retrieve paginated proposals submitted by freelancers
+for a specific job owned by the authenticated client.</p>
+
+<span id="example-requests-GETapi-client-jobs--job_id--proposals">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/client/jobs/1/proposals" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/client/jobs/1/proposals"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-client-jobs--job_id--proposals">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;message&quot;: &quot;get job proposals&quot;,
+    &quot;data&quot;: {
+        &quot;proposals&quot;: [
+            {
+                &quot;id&quot;: 5,
+                &quot;freelancer&quot;: {
+                    &quot;id&quot;: 8,
+                    &quot;name&quot;: &quot;Ahmed Ali&quot;
+                },
+                &quot;bid_amount&quot;: &quot;500.00&quot;,
+                &quot;cover_letter&quot;: &quot;I can build your website.&quot;,
+                &quot;status&quot;: &quot;pending&quot;,
+                &quot;negotiations&quot;: []
+            }
+        ],
+        &quot;pagination&quot;: {
+            &quot;current_page&quot;: 1,
+            &quot;per_page&quot;: 15,
+            &quot;total&quot;: 1,
+            &quot;last_page&quot;: 1,
+            &quot;next_page_url&quot;: null,
+            &quot;prev_page_url&quot;: null
+        }
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;You are not authorized to access this job.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Not Found&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-client-jobs--job_id--proposals" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-client-jobs--job_id--proposals"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-client-jobs--job_id--proposals"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-client-jobs--job_id--proposals" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-client-jobs--job_id--proposals">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-client-jobs--job_id--proposals" data-method="GET"
+      data-path="api/client/jobs/{job_id}/proposals"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-client-jobs--job_id--proposals', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-client-jobs--job_id--proposals"
+                    onclick="tryItOut('GETapi-client-jobs--job_id--proposals');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-client-jobs--job_id--proposals"
+                    onclick="cancelTryOut('GETapi-client-jobs--job_id--proposals');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-client-jobs--job_id--proposals"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/client/jobs/{job_id}/proposals</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-client-jobs--job_id--proposals"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-client-jobs--job_id--proposals"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>job_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="job_id"                data-endpoint="GETapi-client-jobs--job_id--proposals"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the job. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>job</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="job"                data-endpoint="GETapi-client-jobs--job_id--proposals"
+               value="12"
+               data-component="url">
+    <br>
+<p>The ID of the job. Example: <code>12</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="client-proposals-GETapi-client-jobs--job_id--proposals--proposal_id-">Get job proposal</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Retrieve a specific proposal, including freelancer information
+and its negotiation history.</p>
+
+<span id="example-requests-GETapi-client-jobs--job_id--proposals--proposal_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/client/jobs/1/proposals/17" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/client/jobs/1/proposals/17"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-client-jobs--job_id--proposals--proposal_id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;message&quot;: &quot;get job proposal&quot;,
+    &quot;data&quot;: {
+        &quot;proposal&quot;: {
+            &quot;id&quot;: 5,
+            &quot;bid_amount&quot;: &quot;500.00&quot;,
+            &quot;agreed_amount&quot;: null,
+            &quot;status&quot;: &quot;pending&quot;,
+            &quot;negotiations&quot;: []
+        }
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;You are not authorized to access this job.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Proposal not found for this job.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-client-jobs--job_id--proposals--proposal_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-client-jobs--job_id--proposals--proposal_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-client-jobs--job_id--proposals--proposal_id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-client-jobs--job_id--proposals--proposal_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-client-jobs--job_id--proposals--proposal_id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-client-jobs--job_id--proposals--proposal_id-" data-method="GET"
+      data-path="api/client/jobs/{job_id}/proposals/{proposal_id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-client-jobs--job_id--proposals--proposal_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-client-jobs--job_id--proposals--proposal_id-"
+                    onclick="tryItOut('GETapi-client-jobs--job_id--proposals--proposal_id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-client-jobs--job_id--proposals--proposal_id-"
+                    onclick="cancelTryOut('GETapi-client-jobs--job_id--proposals--proposal_id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-client-jobs--job_id--proposals--proposal_id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/client/jobs/{job_id}/proposals/{proposal_id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-client-jobs--job_id--proposals--proposal_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-client-jobs--job_id--proposals--proposal_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>job_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="job_id"                data-endpoint="GETapi-client-jobs--job_id--proposals--proposal_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the job. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>proposal_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="proposal_id"                data-endpoint="GETapi-client-jobs--job_id--proposals--proposal_id-"
+               value="17"
+               data-component="url">
+    <br>
+<p>The ID of the proposal. Example: <code>17</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>job</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="job"                data-endpoint="GETapi-client-jobs--job_id--proposals--proposal_id-"
+               value="12"
+               data-component="url">
+    <br>
+<p>The ID of the job. Example: <code>12</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>proposal</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="proposal"                data-endpoint="GETapi-client-jobs--job_id--proposals--proposal_id-"
+               value="5"
+               data-component="url">
+    <br>
+<p>The ID of the proposal. Example: <code>5</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="client-proposals-PATCHapi-client-jobs--job_id--proposals--proposal_id--accept">Accept a proposal</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Allows the client who owns the job to accept a freelancer's original bid
+without creating a negotiation.</p>
+<p>The proposal must be pending, must not have a pending negotiation,
+and no other proposal for the same job may already be accepted.</p>
+
+<span id="example-requests-PATCHapi-client-jobs--job_id--proposals--proposal_id--accept">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PATCH \
+    "http://localhost/api/client/jobs/1/proposals/17/accept" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/client/jobs/1/proposals/17/accept"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "PATCH",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-PATCHapi-client-jobs--job_id--proposals--proposal_id--accept">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: {
+        &quot;proposal&quot;: {
+            &quot;id&quot;: 5,
+            &quot;job_id&quot;: 1,
+            &quot;bid_amount&quot;: &quot;500.00&quot;,
+            &quot;agreed_amount&quot;: &quot;500.00&quot;,
+            &quot;status&quot;: &quot;accepted&quot;
+        }
+    },
+    &quot;message&quot;: &quot;Proposal accepted successfully.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;You are not authorized to access this job.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Proposal not found for this job.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Another proposal has already been accepted for this job.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-PATCHapi-client-jobs--job_id--proposals--proposal_id--accept" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PATCHapi-client-jobs--job_id--proposals--proposal_id--accept"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PATCHapi-client-jobs--job_id--proposals--proposal_id--accept"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PATCHapi-client-jobs--job_id--proposals--proposal_id--accept" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PATCHapi-client-jobs--job_id--proposals--proposal_id--accept">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PATCHapi-client-jobs--job_id--proposals--proposal_id--accept" data-method="PATCH"
+      data-path="api/client/jobs/{job_id}/proposals/{proposal_id}/accept"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PATCHapi-client-jobs--job_id--proposals--proposal_id--accept', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PATCHapi-client-jobs--job_id--proposals--proposal_id--accept"
+                    onclick="tryItOut('PATCHapi-client-jobs--job_id--proposals--proposal_id--accept');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PATCHapi-client-jobs--job_id--proposals--proposal_id--accept"
+                    onclick="cancelTryOut('PATCHapi-client-jobs--job_id--proposals--proposal_id--accept');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PATCHapi-client-jobs--job_id--proposals--proposal_id--accept"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/client/jobs/{job_id}/proposals/{proposal_id}/accept</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PATCHapi-client-jobs--job_id--proposals--proposal_id--accept"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PATCHapi-client-jobs--job_id--proposals--proposal_id--accept"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>job_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="job_id"                data-endpoint="PATCHapi-client-jobs--job_id--proposals--proposal_id--accept"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the job. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>proposal_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="proposal_id"                data-endpoint="PATCHapi-client-jobs--job_id--proposals--proposal_id--accept"
+               value="17"
+               data-component="url">
+    <br>
+<p>The ID of the proposal. Example: <code>17</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>job</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="job"                data-endpoint="PATCHapi-client-jobs--job_id--proposals--proposal_id--accept"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the job. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>proposal</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="proposal"                data-endpoint="PATCHapi-client-jobs--job_id--proposals--proposal_id--accept"
+               value="5"
+               data-component="url">
+    <br>
+<p>The ID of the proposal. Example: <code>5</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="client-proposals-PATCHapi-client-jobs--job_id--proposals--proposal_id--reject">Reject a proposal</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Allows the client who owns the job to reject a pending freelancer proposal.</p>
+<p>A proposal cannot be rejected while a negotiation is pending.</p>
+
+<span id="example-requests-PATCHapi-client-jobs--job_id--proposals--proposal_id--reject">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PATCH \
+    "http://localhost/api/client/jobs/1/proposals/17/reject" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/client/jobs/1/proposals/17/reject"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "PATCH",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-PATCHapi-client-jobs--job_id--proposals--proposal_id--reject">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: {
+        &quot;proposal&quot;: {
+            &quot;id&quot;: 5,
+            &quot;job_id&quot;: 1,
+            &quot;bid_amount&quot;: &quot;500.00&quot;,
+            &quot;agreed_amount&quot;: null,
+            &quot;status&quot;: &quot;rejected&quot;
+        }
+    },
+    &quot;message&quot;: &quot;Proposal rejected successfully.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;You are not authorized to access this job.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Proposal not found for this job.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Only pending proposals can be rejected.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-PATCHapi-client-jobs--job_id--proposals--proposal_id--reject" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PATCHapi-client-jobs--job_id--proposals--proposal_id--reject"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PATCHapi-client-jobs--job_id--proposals--proposal_id--reject"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PATCHapi-client-jobs--job_id--proposals--proposal_id--reject" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PATCHapi-client-jobs--job_id--proposals--proposal_id--reject">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PATCHapi-client-jobs--job_id--proposals--proposal_id--reject" data-method="PATCH"
+      data-path="api/client/jobs/{job_id}/proposals/{proposal_id}/reject"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PATCHapi-client-jobs--job_id--proposals--proposal_id--reject', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PATCHapi-client-jobs--job_id--proposals--proposal_id--reject"
+                    onclick="tryItOut('PATCHapi-client-jobs--job_id--proposals--proposal_id--reject');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PATCHapi-client-jobs--job_id--proposals--proposal_id--reject"
+                    onclick="cancelTryOut('PATCHapi-client-jobs--job_id--proposals--proposal_id--reject');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PATCHapi-client-jobs--job_id--proposals--proposal_id--reject"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/client/jobs/{job_id}/proposals/{proposal_id}/reject</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PATCHapi-client-jobs--job_id--proposals--proposal_id--reject"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PATCHapi-client-jobs--job_id--proposals--proposal_id--reject"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>job_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="job_id"                data-endpoint="PATCHapi-client-jobs--job_id--proposals--proposal_id--reject"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the job. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>proposal_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="proposal_id"                data-endpoint="PATCHapi-client-jobs--job_id--proposals--proposal_id--reject"
+               value="17"
+               data-component="url">
+    <br>
+<p>The ID of the proposal. Example: <code>17</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>job</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="job"                data-endpoint="PATCHapi-client-jobs--job_id--proposals--proposal_id--reject"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the job. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>proposal</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="proposal"                data-endpoint="PATCHapi-client-jobs--job_id--proposals--proposal_id--reject"
+               value="5"
+               data-component="url">
+    <br>
+<p>The ID of the proposal. Example: <code>5</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="client-proposals-POSTapi-client-jobs--job_id--proposals--proposal_id--negotiations">Create negotiation</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Create a counteroffer for a freelancer's proposal.
+Any previous pending counteroffer for the same proposal
+is marked as superseded.</p>
+
+<span id="example-requests-POSTapi-client-jobs--job_id--proposals--proposal_id--negotiations">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/client/jobs/1/proposals/17/negotiations" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"proposed_amount\": 400,
+    \"message\": \"My budget for this project is 400.\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/client/jobs/1/proposals/17/negotiations"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "proposed_amount": 400,
+    "message": "My budget for this project is 400."
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-client-jobs--job_id--proposals--proposal_id--negotiations">
+            <blockquote>
+            <p>Example response (201):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;message&quot;: &quot;Nehotation Created successfully&quot;,
+    &quot;data&quot;: {
+        &quot;negotiation&quot;: {
+            &quot;id&quot;: 8,
+            &quot;proposal_id&quot;: 5,
+            &quot;proposed_by&quot;: 3,
+            &quot;proposed_amount&quot;: &quot;400.00&quot;,
+            &quot;message&quot;: &quot;My budget for this project is 400.&quot;,
+            &quot;status&quot;: &quot;pending&quot;,
+            &quot;responded_at&quot;: null
+        }
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;You are not authorized to access this job.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Proposal not found for this job.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;The given data was invalid.&quot;,
+    &quot;errors&quot;: {
+        &quot;proposed_amount&quot;: [
+            &quot;The proposed amount field is required.&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-client-jobs--job_id--proposals--proposal_id--negotiations" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-client-jobs--job_id--proposals--proposal_id--negotiations"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-client-jobs--job_id--proposals--proposal_id--negotiations"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-client-jobs--job_id--proposals--proposal_id--negotiations" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-client-jobs--job_id--proposals--proposal_id--negotiations">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-client-jobs--job_id--proposals--proposal_id--negotiations" data-method="POST"
+      data-path="api/client/jobs/{job_id}/proposals/{proposal_id}/negotiations"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-client-jobs--job_id--proposals--proposal_id--negotiations', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-client-jobs--job_id--proposals--proposal_id--negotiations"
+                    onclick="tryItOut('POSTapi-client-jobs--job_id--proposals--proposal_id--negotiations');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-client-jobs--job_id--proposals--proposal_id--negotiations"
+                    onclick="cancelTryOut('POSTapi-client-jobs--job_id--proposals--proposal_id--negotiations');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-client-jobs--job_id--proposals--proposal_id--negotiations"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/client/jobs/{job_id}/proposals/{proposal_id}/negotiations</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-client-jobs--job_id--proposals--proposal_id--negotiations"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-client-jobs--job_id--proposals--proposal_id--negotiations"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>job_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="job_id"                data-endpoint="POSTapi-client-jobs--job_id--proposals--proposal_id--negotiations"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the job. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>proposal_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="proposal_id"                data-endpoint="POSTapi-client-jobs--job_id--proposals--proposal_id--negotiations"
+               value="17"
+               data-component="url">
+    <br>
+<p>The ID of the proposal. Example: <code>17</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>job</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="job"                data-endpoint="POSTapi-client-jobs--job_id--proposals--proposal_id--negotiations"
+               value="12"
+               data-component="url">
+    <br>
+<p>The ID of the job. Example: <code>12</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>proposal</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="proposal"                data-endpoint="POSTapi-client-jobs--job_id--proposals--proposal_id--negotiations"
+               value="5"
+               data-component="url">
+    <br>
+<p>The ID of the proposal. Example: <code>5</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>proposed_amount</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="proposed_amount"                data-endpoint="POSTapi-client-jobs--job_id--proposals--proposal_id--negotiations"
+               value="400"
+               data-component="body">
+    <br>
+<p>The counteroffer amount. Must be greater than zero and have at most two decimal places. Example: <code>400</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>message</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="message"                data-endpoint="POSTapi-client-jobs--job_id--proposals--proposal_id--negotiations"
+               value="My budget for this project is 400."
+               data-component="body">
+    <br>
+<p>nullable A message explaining the counteroffer. Maximum 2000 characters. Example: <code>My budget for this project is 400.</code></p>
+        </div>
+        </form>
 
                 <h1 id="client-jobs">Client Jobs</h1>
 
@@ -2678,6 +3797,1595 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>nullable The city. Example: <code>Cairo</code></p>
         </div>
         </form>
+
+                <h1 id="freelancer-negotiations">Freelancer - Negotiations</h1>
+
+    
+
+                                <h2 id="freelancer-negotiations-GETapi-freelancer-proposals--proposal_id--negotiations">List proposal negotiations</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Retrieve paginated negotiations associated with a proposal owned
+by the authenticated freelancer. Results can be filtered by status.</p>
+
+<span id="example-requests-GETapi-freelancer-proposals--proposal_id--negotiations">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/freelancer/proposals/17/negotiations?status=pending&amp;page=1" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"status\": \"rejected\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/freelancer/proposals/17/negotiations"
+);
+
+const params = {
+    "status": "pending",
+    "page": "1",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "status": "rejected"
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-freelancer-proposals--proposal_id--negotiations">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;message&quot;: &quot;Negotiations retrieved successfully.&quot;,
+    &quot;data&quot;: {
+        &quot;negotiations&quot;: [
+            {
+                &quot;id&quot;: 8,
+                &quot;proposal_id&quot;: 12,
+                &quot;proposed_by&quot;: 3,
+                &quot;proposed_amount&quot;: &quot;400.00&quot;,
+                &quot;message&quot;: &quot;My budget is 400.&quot;,
+                &quot;status&quot;: &quot;pending&quot;,
+                &quot;responded_at&quot;: null
+            }
+        ],
+        &quot;pagination&quot;: {
+            &quot;current_page&quot;: 1,
+            &quot;per_page&quot;: 15,
+            &quot;total&quot;: 1,
+            &quot;last_page&quot;: 1,
+            &quot;next_page_url&quot;: null,
+            &quot;prev_page_url&quot;: null
+        }
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;You are not authorized to access this proposal.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;The given data was invalid.&quot;,
+    &quot;errors&quot;: {
+        &quot;status&quot;: [
+            &quot;The selected status is invalid.&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-freelancer-proposals--proposal_id--negotiations" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-freelancer-proposals--proposal_id--negotiations"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-freelancer-proposals--proposal_id--negotiations"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-freelancer-proposals--proposal_id--negotiations" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-freelancer-proposals--proposal_id--negotiations">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-freelancer-proposals--proposal_id--negotiations" data-method="GET"
+      data-path="api/freelancer/proposals/{proposal_id}/negotiations"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-freelancer-proposals--proposal_id--negotiations', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-freelancer-proposals--proposal_id--negotiations"
+                    onclick="tryItOut('GETapi-freelancer-proposals--proposal_id--negotiations');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-freelancer-proposals--proposal_id--negotiations"
+                    onclick="cancelTryOut('GETapi-freelancer-proposals--proposal_id--negotiations');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-freelancer-proposals--proposal_id--negotiations"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/freelancer/proposals/{proposal_id}/negotiations</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-freelancer-proposals--proposal_id--negotiations"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-freelancer-proposals--proposal_id--negotiations"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>proposal_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="proposal_id"                data-endpoint="GETapi-freelancer-proposals--proposal_id--negotiations"
+               value="17"
+               data-component="url">
+    <br>
+<p>The ID of the proposal. Example: <code>17</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>proposal</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="proposal"                data-endpoint="GETapi-freelancer-proposals--proposal_id--negotiations"
+               value="12"
+               data-component="url">
+    <br>
+<p>The ID of the freelancer's proposal. Example: <code>12</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>status</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="status"                data-endpoint="GETapi-freelancer-proposals--proposal_id--negotiations"
+               value="pending"
+               data-component="query">
+    <br>
+<p>Filter negotiations by status. Allowed values: pending, accepted, rejected, superseded, withdrawn. Example: <code>pending</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>page</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="page"                data-endpoint="GETapi-freelancer-proposals--proposal_id--negotiations"
+               value="1"
+               data-component="query">
+    <br>
+<p>The pagination page number. Example: <code>1</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>status</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="status"                data-endpoint="GETapi-freelancer-proposals--proposal_id--negotiations"
+               value="rejected"
+               data-component="body">
+    <br>
+<p>Example: <code>rejected</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>pending</code></li> <li><code>accepted</code></li> <li><code>rejected</code></li> <li><code>superseded</code></li> <li><code>withdrawn</code></li></ul>
+        </div>
+        </form>
+
+                    <h2 id="freelancer-negotiations-GETapi-freelancer-proposals--proposal_id--negotiations--negotiation_id-">Show a proposal negotiation</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Retrieve a specific negotiation belonging to a proposal owned
+by the authenticated freelancer.</p>
+
+<span id="example-requests-GETapi-freelancer-proposals--proposal_id--negotiations--negotiation_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/freelancer/proposals/17/negotiations/17" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/freelancer/proposals/17/negotiations/17"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-freelancer-proposals--proposal_id--negotiations--negotiation_id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;message&quot;: &quot;Negotiation retrieved successfully.&quot;,
+    &quot;data&quot;: {
+        &quot;negotiation&quot;: {
+            &quot;id&quot;: 8,
+            &quot;proposal_id&quot;: 12,
+            &quot;proposed_by&quot;: 3,
+            &quot;proposed_amount&quot;: &quot;400.00&quot;,
+            &quot;message&quot;: &quot;My budget is 400.&quot;,
+            &quot;status&quot;: &quot;pending&quot;,
+            &quot;responded_at&quot;: null
+        }
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;You are not authorized to access this proposal.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Negotiation not found for this proposal.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-freelancer-proposals--proposal_id--negotiations--negotiation_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-freelancer-proposals--proposal_id--negotiations--negotiation_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-freelancer-proposals--proposal_id--negotiations--negotiation_id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-freelancer-proposals--proposal_id--negotiations--negotiation_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-freelancer-proposals--proposal_id--negotiations--negotiation_id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-freelancer-proposals--proposal_id--negotiations--negotiation_id-" data-method="GET"
+      data-path="api/freelancer/proposals/{proposal_id}/negotiations/{negotiation_id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-freelancer-proposals--proposal_id--negotiations--negotiation_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-freelancer-proposals--proposal_id--negotiations--negotiation_id-"
+                    onclick="tryItOut('GETapi-freelancer-proposals--proposal_id--negotiations--negotiation_id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-freelancer-proposals--proposal_id--negotiations--negotiation_id-"
+                    onclick="cancelTryOut('GETapi-freelancer-proposals--proposal_id--negotiations--negotiation_id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-freelancer-proposals--proposal_id--negotiations--negotiation_id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/freelancer/proposals/{proposal_id}/negotiations/{negotiation_id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-freelancer-proposals--proposal_id--negotiations--negotiation_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-freelancer-proposals--proposal_id--negotiations--negotiation_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>proposal_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="proposal_id"                data-endpoint="GETapi-freelancer-proposals--proposal_id--negotiations--negotiation_id-"
+               value="17"
+               data-component="url">
+    <br>
+<p>The ID of the proposal. Example: <code>17</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>negotiation_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="negotiation_id"                data-endpoint="GETapi-freelancer-proposals--proposal_id--negotiations--negotiation_id-"
+               value="17"
+               data-component="url">
+    <br>
+<p>The ID of the negotiation. Example: <code>17</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>proposal</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="proposal"                data-endpoint="GETapi-freelancer-proposals--proposal_id--negotiations--negotiation_id-"
+               value="12"
+               data-component="url">
+    <br>
+<p>The ID of the freelancer's proposal. Example: <code>12</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>negotiation</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="negotiation"                data-endpoint="GETapi-freelancer-proposals--proposal_id--negotiations--negotiation_id-"
+               value="8"
+               data-component="url">
+    <br>
+<p>The ID of the negotiation. Example: <code>8</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="freelancer-negotiations-PATCHapi-freelancer-proposals--proposal_id--negotiations--negotiation_id--accept">Accept a counteroffer</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Accept a pending counteroffer created by the client.
+The negotiation is marked as accepted, the agreed amount is saved
+on the proposal, and the proposal status becomes accepted.
+Other pending negotiations for the same proposal are superseded.</p>
+
+<span id="example-requests-PATCHapi-freelancer-proposals--proposal_id--negotiations--negotiation_id--accept">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PATCH \
+    "http://localhost/api/freelancer/proposals/17/negotiations/17/accept" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/freelancer/proposals/17/negotiations/17/accept"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "PATCH",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-PATCHapi-freelancer-proposals--proposal_id--negotiations--negotiation_id--accept">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;message&quot;: &quot;Counteroffer accepted successfully.&quot;,
+    &quot;data&quot;: {
+        &quot;negotiation&quot;: {
+            &quot;id&quot;: 8,
+            &quot;proposal_id&quot;: 12,
+            &quot;proposed_amount&quot;: &quot;400.00&quot;,
+            &quot;status&quot;: &quot;accepted&quot;
+        },
+        &quot;proposal&quot;: {
+            &quot;id&quot;: 12,
+            &quot;agreed_amount&quot;: &quot;400.00&quot;,
+            &quot;status&quot;: &quot;accepted&quot;
+        }
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;You are not authorized to access this proposal.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Negotiation not found for this proposal.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;The given data was invalid.&quot;,
+    &quot;errors&quot;: {
+        &quot;negotiation&quot;: [
+            &quot;This negotiation is no longer available for acceptance.&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-PATCHapi-freelancer-proposals--proposal_id--negotiations--negotiation_id--accept" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PATCHapi-freelancer-proposals--proposal_id--negotiations--negotiation_id--accept"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PATCHapi-freelancer-proposals--proposal_id--negotiations--negotiation_id--accept"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PATCHapi-freelancer-proposals--proposal_id--negotiations--negotiation_id--accept" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PATCHapi-freelancer-proposals--proposal_id--negotiations--negotiation_id--accept">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PATCHapi-freelancer-proposals--proposal_id--negotiations--negotiation_id--accept" data-method="PATCH"
+      data-path="api/freelancer/proposals/{proposal_id}/negotiations/{negotiation_id}/accept"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PATCHapi-freelancer-proposals--proposal_id--negotiations--negotiation_id--accept', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PATCHapi-freelancer-proposals--proposal_id--negotiations--negotiation_id--accept"
+                    onclick="tryItOut('PATCHapi-freelancer-proposals--proposal_id--negotiations--negotiation_id--accept');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PATCHapi-freelancer-proposals--proposal_id--negotiations--negotiation_id--accept"
+                    onclick="cancelTryOut('PATCHapi-freelancer-proposals--proposal_id--negotiations--negotiation_id--accept');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PATCHapi-freelancer-proposals--proposal_id--negotiations--negotiation_id--accept"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/freelancer/proposals/{proposal_id}/negotiations/{negotiation_id}/accept</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PATCHapi-freelancer-proposals--proposal_id--negotiations--negotiation_id--accept"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PATCHapi-freelancer-proposals--proposal_id--negotiations--negotiation_id--accept"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>proposal_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="proposal_id"                data-endpoint="PATCHapi-freelancer-proposals--proposal_id--negotiations--negotiation_id--accept"
+               value="17"
+               data-component="url">
+    <br>
+<p>The ID of the proposal. Example: <code>17</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>negotiation_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="negotiation_id"                data-endpoint="PATCHapi-freelancer-proposals--proposal_id--negotiations--negotiation_id--accept"
+               value="17"
+               data-component="url">
+    <br>
+<p>The ID of the negotiation. Example: <code>17</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>proposal</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="proposal"                data-endpoint="PATCHapi-freelancer-proposals--proposal_id--negotiations--negotiation_id--accept"
+               value="12"
+               data-component="url">
+    <br>
+<p>The ID of the freelancer's proposal. Example: <code>12</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>negotiation</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="negotiation"                data-endpoint="PATCHapi-freelancer-proposals--proposal_id--negotiations--negotiation_id--accept"
+               value="8"
+               data-component="url">
+    <br>
+<p>The ID of the negotiation. Example: <code>8</code></p>
+            </div>
+                    </form>
+
+                <h1 id="freelancer-proposals">Freelancer - Proposals</h1>
+
+    
+
+                                <h2 id="freelancer-proposals-POSTapi-freelancer-proposals">Submit a proposal</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Submit a proposal for a job as the authenticated freelancer.</p>
+
+<span id="example-requests-POSTapi-freelancer-proposals">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/freelancer/proposals" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"job_id\": 12,
+    \"bid_amount\": 500,
+    \"cover_letter\": \"I have experience building similar applications.\",
+    \"estimated_duration\": 14
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/freelancer/proposals"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "job_id": 12,
+    "bid_amount": 500,
+    "cover_letter": "I have experience building similar applications.",
+    "estimated_duration": 14
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-freelancer-proposals">
+            <blockquote>
+            <p>Example response (201):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;message&quot;: &quot;proposal send successfully&quot;,
+    &quot;data&quot;: {
+        &quot;proposal&quot;: {
+            &quot;id&quot;: 5,
+            &quot;job_id&quot;: 12,
+            &quot;bid_amount&quot;: &quot;500.00&quot;,
+            &quot;estimated_duration&quot;: 14,
+            &quot;cover_letter&quot;: &quot;I have experience building similar applications.&quot;,
+            &quot;status&quot;: &quot;pending&quot;
+        }
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;The given data was invalid.&quot;,
+    &quot;errors&quot;: {
+        &quot;bid_amount&quot;: [
+            &quot;The bid amount field is required.&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-freelancer-proposals" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-freelancer-proposals"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-freelancer-proposals"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-freelancer-proposals" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-freelancer-proposals">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-freelancer-proposals" data-method="POST"
+      data-path="api/freelancer/proposals"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-freelancer-proposals', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-freelancer-proposals"
+                    onclick="tryItOut('POSTapi-freelancer-proposals');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-freelancer-proposals"
+                    onclick="cancelTryOut('POSTapi-freelancer-proposals');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-freelancer-proposals"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/freelancer/proposals</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-freelancer-proposals"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-freelancer-proposals"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>job_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="job_id"                data-endpoint="POSTapi-freelancer-proposals"
+               value="12"
+               data-component="body">
+    <br>
+<p>The ID of the job. Example: <code>12</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>bid_amount</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="bid_amount"                data-endpoint="POSTapi-freelancer-proposals"
+               value="500"
+               data-component="body">
+    <br>
+<p>The requested project price. Must be positive. Example: <code>500</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>cover_letter</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="cover_letter"                data-endpoint="POSTapi-freelancer-proposals"
+               value="I have experience building similar applications."
+               data-component="body">
+    <br>
+<p>The freelancer's cover letter. Example: <code>I have experience building similar applications.</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>estimated_duration</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="estimated_duration"                data-endpoint="POSTapi-freelancer-proposals"
+               value="14"
+               data-component="body">
+    <br>
+<p>nullable Estimated project duration. Example: <code>14</code></p>
+        </div>
+        </form>
+
+                    <h2 id="freelancer-proposals-GETapi-freelancer-proposals">List my proposals</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Retrieve all proposals submitted by the authenticated freelancer.</p>
+
+<span id="example-requests-GETapi-freelancer-proposals">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/freelancer/proposals" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/freelancer/proposals"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-freelancer-proposals">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;message&quot;: &quot;Get freelancer proposals&quot;,
+    &quot;data&quot;: {
+        &quot;proposals&quot;: [
+            {
+                &quot;id&quot;: 5,
+                &quot;job-title&quot;: &quot;E-commerce Website&quot;,
+                &quot;job-description&quot;: &quot;Build an online store.&quot;,
+                &quot;bid_amount&quot;: &quot;500.00&quot;,
+                &quot;cover_letter&quot;: &quot;I can build your website.&quot;,
+                &quot;status&quot;: &quot;pending&quot;
+            }
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-freelancer-proposals" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-freelancer-proposals"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-freelancer-proposals"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-freelancer-proposals" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-freelancer-proposals">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-freelancer-proposals" data-method="GET"
+      data-path="api/freelancer/proposals"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-freelancer-proposals', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-freelancer-proposals"
+                    onclick="tryItOut('GETapi-freelancer-proposals');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-freelancer-proposals"
+                    onclick="cancelTryOut('GETapi-freelancer-proposals');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-freelancer-proposals"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/freelancer/proposals</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-freelancer-proposals"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-freelancer-proposals"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="freelancer-proposals-GETapi-freelancer-proposals--proposal_id-">Get my proposal</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Retrieve details of a proposal owned by the authenticated freelancer.</p>
+
+<span id="example-requests-GETapi-freelancer-proposals--proposal_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/freelancer/proposals/17" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/freelancer/proposals/17"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-freelancer-proposals--proposal_id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;message&quot;: &quot;Get a proposal&quot;,
+    &quot;data&quot;: {
+        &quot;proposals&quot;: {
+            &quot;id&quot;: 5,
+            &quot;job-title&quot;: &quot;E-commerce Website&quot;,
+            &quot;job-description&quot;: &quot;Build an online store.&quot;,
+            &quot;bid_amount&quot;: &quot;500.00&quot;,
+            &quot;cover_letter&quot;: &quot;I can build your website.&quot;,
+            &quot;status&quot;: &quot;pending&quot;
+        }
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;This action is unauthorized.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Not Found&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-freelancer-proposals--proposal_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-freelancer-proposals--proposal_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-freelancer-proposals--proposal_id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-freelancer-proposals--proposal_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-freelancer-proposals--proposal_id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-freelancer-proposals--proposal_id-" data-method="GET"
+      data-path="api/freelancer/proposals/{proposal_id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-freelancer-proposals--proposal_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-freelancer-proposals--proposal_id-"
+                    onclick="tryItOut('GETapi-freelancer-proposals--proposal_id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-freelancer-proposals--proposal_id-"
+                    onclick="cancelTryOut('GETapi-freelancer-proposals--proposal_id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-freelancer-proposals--proposal_id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/freelancer/proposals/{proposal_id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-freelancer-proposals--proposal_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-freelancer-proposals--proposal_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>proposal_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="proposal_id"                data-endpoint="GETapi-freelancer-proposals--proposal_id-"
+               value="17"
+               data-component="url">
+    <br>
+<p>The ID of the proposal. Example: <code>17</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>proposal</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="proposal"                data-endpoint="GETapi-freelancer-proposals--proposal_id-"
+               value="5"
+               data-component="url">
+    <br>
+<p>The ID of the proposal. Example: <code>5</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="freelancer-proposals-PATCHapi-freelancer-proposals--proposal_id-">Update my proposal</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Update an existing proposal owned by the authenticated freelancer.
+Only proposals with pending status can be updated.</p>
+
+<span id="example-requests-PATCHapi-freelancer-proposals--proposal_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PATCH \
+    "http://localhost/api/freelancer/proposals/17" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"cover_letter\": \"I can deliver additional features.\",
+    \"estimated_duration\": 20,
+    \"bid_amount\": 600
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/freelancer/proposals/17"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "cover_letter": "I can deliver additional features.",
+    "estimated_duration": 20,
+    "bid_amount": 600
+};
+
+fetch(url, {
+    method: "PATCH",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-PATCHapi-freelancer-proposals--proposal_id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;message&quot;: &quot;Proposal updated successfully.&quot;,
+    &quot;data&quot;: {
+        &quot;proposal&quot;: {
+            &quot;id&quot;: 5,
+            &quot;bid_amount&quot;: &quot;600.00&quot;,
+            &quot;estimated_duration&quot;: 20,
+            &quot;cover_letter&quot;: &quot;I can deliver additional features.&quot;,
+            &quot;status&quot;: &quot;pending&quot;
+        }
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;This action is unauthorized.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Only pending proposals can be updated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-PATCHapi-freelancer-proposals--proposal_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PATCHapi-freelancer-proposals--proposal_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PATCHapi-freelancer-proposals--proposal_id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PATCHapi-freelancer-proposals--proposal_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PATCHapi-freelancer-proposals--proposal_id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PATCHapi-freelancer-proposals--proposal_id-" data-method="PATCH"
+      data-path="api/freelancer/proposals/{proposal_id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PATCHapi-freelancer-proposals--proposal_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PATCHapi-freelancer-proposals--proposal_id-"
+                    onclick="tryItOut('PATCHapi-freelancer-proposals--proposal_id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PATCHapi-freelancer-proposals--proposal_id-"
+                    onclick="cancelTryOut('PATCHapi-freelancer-proposals--proposal_id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PATCHapi-freelancer-proposals--proposal_id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/freelancer/proposals/{proposal_id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PATCHapi-freelancer-proposals--proposal_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PATCHapi-freelancer-proposals--proposal_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>proposal_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="proposal_id"                data-endpoint="PATCHapi-freelancer-proposals--proposal_id-"
+               value="17"
+               data-component="url">
+    <br>
+<p>The ID of the proposal. Example: <code>17</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>proposal</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="proposal"                data-endpoint="PATCHapi-freelancer-proposals--proposal_id-"
+               value="5"
+               data-component="url">
+    <br>
+<p>The ID of the proposal. Example: <code>5</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>cover_letter</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="cover_letter"                data-endpoint="PATCHapi-freelancer-proposals--proposal_id-"
+               value="I can deliver additional features."
+               data-component="body">
+    <br>
+<p>optional The updated cover letter. Example: <code>I can deliver additional features.</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>estimated_duration</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="estimated_duration"                data-endpoint="PATCHapi-freelancer-proposals--proposal_id-"
+               value="20"
+               data-component="body">
+    <br>
+<p>nullable The updated estimated duration. Example: <code>20</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>bid_amount</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="bid_amount"                data-endpoint="PATCHapi-freelancer-proposals--proposal_id-"
+               value="600"
+               data-component="body">
+    <br>
+<p>optional The updated requested price. Example: <code>600</code></p>
+        </div>
+        </form>
+
+                    <h2 id="freelancer-proposals-PATCHapi-freelancer-proposals--proposal_id--withdraw">Withdraw my proposal</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Withdraw a previously submitted proposal.
+Only proposals with pending status can be withdrawn.</p>
+
+<span id="example-requests-PATCHapi-freelancer-proposals--proposal_id--withdraw">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PATCH \
+    "http://localhost/api/freelancer/proposals/17/withdraw" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/freelancer/proposals/17/withdraw"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "PATCH",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-PATCHapi-freelancer-proposals--proposal_id--withdraw">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;message&quot;: &quot;Proposal withdrawn successfully.&quot;,
+    &quot;data&quot;: {
+        &quot;proposal&quot;: {
+            &quot;id&quot;: 5,
+            &quot;status&quot;: &quot;withdrawn&quot;
+        }
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;This action is unauthorized.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Only pending proposals can be withdrawn.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-PATCHapi-freelancer-proposals--proposal_id--withdraw" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PATCHapi-freelancer-proposals--proposal_id--withdraw"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PATCHapi-freelancer-proposals--proposal_id--withdraw"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PATCHapi-freelancer-proposals--proposal_id--withdraw" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PATCHapi-freelancer-proposals--proposal_id--withdraw">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PATCHapi-freelancer-proposals--proposal_id--withdraw" data-method="PATCH"
+      data-path="api/freelancer/proposals/{proposal_id}/withdraw"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PATCHapi-freelancer-proposals--proposal_id--withdraw', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PATCHapi-freelancer-proposals--proposal_id--withdraw"
+                    onclick="tryItOut('PATCHapi-freelancer-proposals--proposal_id--withdraw');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PATCHapi-freelancer-proposals--proposal_id--withdraw"
+                    onclick="cancelTryOut('PATCHapi-freelancer-proposals--proposal_id--withdraw');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PATCHapi-freelancer-proposals--proposal_id--withdraw"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/freelancer/proposals/{proposal_id}/withdraw</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PATCHapi-freelancer-proposals--proposal_id--withdraw"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PATCHapi-freelancer-proposals--proposal_id--withdraw"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>proposal_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="proposal_id"                data-endpoint="PATCHapi-freelancer-proposals--proposal_id--withdraw"
+               value="17"
+               data-component="url">
+    <br>
+<p>The ID of the proposal. Example: <code>17</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>proposal</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="proposal"                data-endpoint="PATCHapi-freelancer-proposals--proposal_id--withdraw"
+               value="5"
+               data-component="url">
+    <br>
+<p>The ID of the proposal. Example: <code>5</code></p>
+            </div>
+                    </form>
 
                 <h1 id="freelancer-profile">Freelancer Profile</h1>
 

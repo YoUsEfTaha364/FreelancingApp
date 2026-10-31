@@ -51,4 +51,8 @@ class Job extends Model
     {
         return $this->belongsToMany(Skill::class, 'job_skill');
     }
+
+    public function proposals(){
+        return $this->hasMany(Proposal::class,"job_id");
+    }
 }
