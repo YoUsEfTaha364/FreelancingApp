@@ -137,6 +137,212 @@ class ProposalController extends Controller
         ], 200, "get job proposal");
     }
 
+    /**
+     * Accept a proposal
+     *
+     * Allows the client who owns the job to accept a freelancer's original bid
+     * without creating a negotiation.
+     *
+     * The proposal must be pending, must not have a pending negotiation,
+     * and no other proposal for the same job may already be accepted.
+     *
+     * @group Client - Proposals
+     *
+     * @authenticated
+     *
+     * @urlParam job integer required The ID of the job. Example: 1
+     * @urlParam proposal integer required The ID of the proposal. Example: 5
+     *
+     * @response 200 {
+     *   "data": {
+     *     "proposal": {
+     *       "id": 5,
+     *       "job_id": 1,
+     *       "bid_amount": "500.00",
+     *       "agreed_amount": "500.00",
+     *       "status": "accepted"
+     *     }
+     *   },
+     *   "message": "Proposal accepted successfully."
+     * }
+     *
+     * @response 403 {
+     *   "message": "You are not authorized to access this job."
+     * }
+     *
+     * @response 404 {
+     *   "message": "Proposal not found for this job."
+     * }
+     *
+     * @response 422 {
+     *   "message": "Another proposal has already been accepted for this job."
+     * }
+     */
+    public function accept(Job $job, Proposal $proposal)
+    {
+        $this->authorizeJob($job);
+        $this->ensureProposalBelongsToJob($job, $proposal);
+
+        $result = DB::transaction(function () use ($job, $proposal) {
+            $lockedJob = Job::query()
+                ->whereKey($job->id)
+                ->lockForUpdate()
+                ->firstOrFail();
+
+            $lockedProposal = $lockedJob->proposals()
+                ->whereKey($proposal->id)
+                ->lockForUpdate()
+                ->firstOrFail();
+
+            if ($lockedProposal->status !== 'pending') {
+                return [
+                    'error' => 'Only pending proposals can be accepted.',
+                    'status' => 422,
+                ];
+            }
+
+            if ($lockedProposal->negotiations()
+                ->where('status', 'pending')
+                ->exists()
+            ) {
+                return [
+                    'error' => 'Resolve the pending negotiation before accepting this proposal.',
+                    'status' => 422,
+                ];
+            }
+
+            $anotherAcceptedProposal = Proposal::query()
+                ->where('job_id', $lockedJob->id)
+                ->where('status', 'accepted')
+                ->exists();
+
+            if ($anotherAcceptedProposal) {
+                return [
+                    'error' => 'Another proposal has already been accepted for this job.',
+                    'status' => 422,
+                ];
+            }
+
+            $lockedProposal->update([
+                'agreed_amount' => $lockedProposal->bid_amount,
+                'status' => 'accepted',
+            ]);
+
+            return [
+                'proposal' => $lockedProposal->fresh(),
+            ];
+        });
+
+        if (isset($result['error'])) {
+            return ResponseService::Response(
+                [],
+                $result['status'],
+                $result['error']
+            );
+        }
+
+        return ResponseService::Response([
+            'proposal' => new ClientProposalResource($result['proposal']),
+        ], 200, 'Proposal accepted successfully.');
+    }
+
+
+    /**
+     * Reject a proposal
+     *
+     * Allows the client who owns the job to reject a pending freelancer proposal.
+     *
+     * A proposal cannot be rejected while a negotiation is pending.
+     *
+     * @group Client - Proposals
+     *
+     * @authenticated
+     *
+     * @urlParam job integer required The ID of the job. Example: 1
+     * @urlParam proposal integer required The ID of the proposal. Example: 5
+     *
+     * @response 200 {
+     *   "data": {
+     *     "proposal": {
+     *       "id": 5,
+     *       "job_id": 1,
+     *       "bid_amount": "500.00",
+     *       "agreed_amount": null,
+     *       "status": "rejected"
+     *     }
+     *   },
+     *   "message": "Proposal rejected successfully."
+     * }
+     *
+     * @response 403 {
+     *   "message": "You are not authorized to access this job."
+     * }
+     *
+     * @response 404 {
+     *   "message": "Proposal not found for this job."
+     * }
+     *
+     * @response 422 {
+     *   "message": "Only pending proposals can be rejected."
+     * }
+     */
+
+
+    public function reject(Job $job, Proposal $proposal)
+    {
+        $this->authorizeJob($job);
+        $this->ensureProposalBelongsToJob($job, $proposal);
+
+        $result = DB::transaction(function () use ($job, $proposal) {
+            $lockedJob = Job::query()
+                ->whereKey($job->id)
+                ->lockForUpdate()
+                ->firstOrFail();
+
+            $lockedProposal = $lockedJob->proposals()
+                ->whereKey($proposal->id)
+                ->lockForUpdate()
+                ->firstOrFail();
+
+            if ($lockedProposal->status !== 'pending') {
+                return [
+                    'error' => 'Only pending proposals can be rejected.',
+                    'status' => 422,
+                ];
+            }
+
+            if ($lockedProposal->negotiations()
+                ->where('status', 'pending')
+                ->exists()
+            ) {
+                return [
+                    'error' => 'Resolve the pending negotiation before rejecting this proposal.',
+                    'status' => 422,
+                ];
+            }
+
+            $lockedProposal->update([
+                'status' => 'rejected',
+            ]);
+
+            return [
+                'proposal' => $lockedProposal->fresh(),
+            ];
+        });
+
+        if (isset($result['error'])) {
+            return ResponseService::Response(
+                [],
+                $result['status'],
+                $result['error']
+            );
+        }
+
+        return ResponseService::Response([
+            'proposal' => new ClientProposalResource($result['proposal']),
+        ], 200, 'Proposal rejected successfully.');
+    }
+
 
     /**
      * Create negotiation

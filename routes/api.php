@@ -124,6 +124,14 @@ Route::middleware(["auth:sanctum", "client"])
 
         Route::get("jobs/{job}/proposals", [ClientProposalController::class, "index"]);
         Route::get("jobs/{job}/proposals/{proposal}", [ClientProposalController::class, "show"]);
+        Route::patch(
+            'jobs/{job}/proposals/{proposal}/accept',
+            [ClientProposalController::class, 'accept']
+        );
+        Route::patch(
+            'jobs/{job}/proposals/{proposal}/reject',
+            [ClientProposalController::class, 'reject']
+        );
         Route::post("jobs/{job}/proposals/{proposal}/negotiations", [ClientProposalController::class, "storeNegotiation"]);
     });
 
