@@ -189,7 +189,7 @@ endpoints:
         name: proposal_id
         description: 'The ID of the proposal.'
         required: true
-        example: 17
+        example: 2
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -207,7 +207,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      proposal_id: 17
+      proposal_id: 2
       proposal: 5
     queryParameters: []
     cleanQueryParameters: []
@@ -284,7 +284,7 @@ endpoints:
         name: proposal_id
         description: 'The ID of the proposal.'
         required: true
-        example: 17
+        example: 2
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -302,7 +302,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      proposal_id: 17
+      proposal_id: 2
       proposal: 5
     queryParameters: []
     cleanQueryParameters: []
@@ -414,7 +414,7 @@ endpoints:
         name: proposal_id
         description: 'The ID of the proposal.'
         required: true
-        example: 17
+        example: 2
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -432,7 +432,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      proposal_id: 17
+      proposal_id: 2
       proposal: 5
     queryParameters: []
     cleanQueryParameters: []

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\NegotiationResource;
 use App\Models\Negotiation;
 use App\Models\Proposal;
+use App\Notifications\CounterofferAccepted;
+use App\Notifications\CounterofferRejected;
 use App\Services\ResponseService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -264,6 +266,17 @@ class NegotiationController extends Controller
             return $lockedNegotiation->fresh();
         });
 
+        $proposal->job->client->notify(
+            new CounterofferAccepted(
+                $negotiation->id,
+                $proposal->id,
+                $proposal->job->id,
+                $proposal->freelancer->first_name,
+                $proposal->job->title,
+                (float) $negotiation->proposed_amount
+            )
+        );
+
         return ResponseService::Response([
             'negotiation' => new NegotiationResource($updatedNegotiation),
             'proposal' => [
@@ -355,6 +368,19 @@ class NegotiationController extends Controller
 
             return $lockedNegotiation->fresh();
         });
+
+         $proposal->job->client->notify(
+            new CounterofferRejected(
+                $negotiation->id,
+                $proposal->id,
+                $proposal->job->id,
+                $proposal->freelancer->first_name,
+                $proposal->job->title,
+                (float) $negotiation->proposed_amount
+            )
+        );
+
+   
 
         return ResponseService::Response([
             'negotiation' => new NegotiationResource($updatedNegotiation),

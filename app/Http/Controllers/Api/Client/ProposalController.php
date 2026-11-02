@@ -9,6 +9,8 @@ use App\Http\Resources\NegotiationResource;
 use App\Models\Job;
 use App\Models\Proposal;
 use App\Models\Negotiation;
+use App\Notifications\CounterofferReceived;
+use App\Notifications\ProposalAccepted;
 use App\Services\ResponseService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -241,6 +243,15 @@ class ProposalController extends Controller
             );
         }
 
+        $proposal->freelancer->notify(
+            new ProposalAccepted(
+                $proposal->id,
+                $job->id,
+                Auth::user()->first_name,
+                $job->title
+            )
+        );
+
         return ResponseService::Response([
             'proposal' => new ClientProposalResource($result['proposal']),
         ], 200, 'Proposal accepted successfully.');
@@ -338,6 +349,15 @@ class ProposalController extends Controller
             );
         }
 
+         $proposal->freelancer->notify(
+            new ProposalAccepted(
+                $proposal->id,
+                $job->id,
+                Auth::user()->first_name,
+                $job->title
+            )
+        );
+
         return ResponseService::Response([
             'proposal' => new ClientProposalResource($result['proposal']),
         ], 200, 'Proposal rejected successfully.');
@@ -430,6 +450,15 @@ class ProposalController extends Controller
                 'status' => 'pending',
             ]);
         });
+
+        $proposal->freelancer->notify(new CounterofferReceived(
+            $proposal->id,
+            $job->id,
+            $negotiation->id,
+            $job->client->first_name,
+            $job->title,
+            $negotiation->proposed_amount      
+            ));
 
         return ResponseService::Response(["negotiation" => new NegotiationResource($negotiation)], 201, "Nehotation Created successfully");
     }

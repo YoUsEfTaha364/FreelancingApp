@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\Client\ProposalController as ClientProposalControll
 use App\Http\Controllers\Api\Freelancer\ProposalController;
 use App\Http\Controllers\Api\Freelancer\NegotiationController;
 use App\Http\Controllers\Api\JobController;
+use App\Http\Controllers\Api\NotificationController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -34,8 +35,7 @@ Route::prefix('auth')->group(function () {
 
 
 
-
-
+   
 Route::middleware(["auth:sanctum", "freelancer"])
     ->prefix("freelancer")
     ->group(function () {
@@ -141,3 +141,27 @@ Route::middleware("auth:sanctum")->group(function () {
     Route::get("jobs", [JobController::class, "index"]);
     Route::get("jobs/{job}", [JobController::class, "show"]);
 });
+
+
+
+
+Route::middleware('auth:sanctum')
+    ->prefix('notifications')
+    ->controller(NotificationController::class)
+    ->group(function () {
+
+        Route::get('/', 'index');
+
+        Route::get('/unread', 'unread');
+
+        Route::get('/unread-count', 'unreadCount');
+
+        Route::patch('/read-all', 'markAllAsRead');
+
+        Route::patch('/{id}/read', 'markAsRead');
+
+        Route::delete('/{id}', 'destroy');
+    });
+
+
+

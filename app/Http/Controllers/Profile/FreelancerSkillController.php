@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\UpdateFreelancerSkillsRequest;
+use App\Models\Language;
+use App\Models\Skill;
 use App\Services\ResponseService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -128,4 +130,5 @@ class FreelancerSkillController extends Controller
                 ->values(),
         ], 200, 'Freelancer skills updated successfully');
     }
+
 }

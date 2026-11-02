@@ -6,7 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Freelancer\ProposalUpdateRequest;
 use App\Http\Requests\Freelancer\StorePropsalRequest;
 use App\Http\Resources\Freelancer\ProposalResource;
+use App\Models\Job;
 use App\Models\Proposal;
+use App\Notifications\ProposalSubmitted;
+use App\Notifications\ProposalUpdated;
+use App\Notifications\ProposalWithdrawn;
 use App\Services\ResponseService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -56,15 +60,24 @@ class ProposalController extends Controller
         //job_id , bid_amount , cover_letter
 
         $validated = $request->validated();
+        
+        $job = Job::findOrFail($validated['job_id']);
 
         $proposal = Proposal::create([
-            "freelancer_id" => Auth::user()->id,
-            "job_id" => $validated["job_id"],
-            "bid_amount" => $validated["bid_amount"],
-            "estimated_duration" => $validated["estimated_duration"] ?? null,
-            "cover_letter" => $validated["cover_letter"],
+            'freelancer_id' => Auth::id(),
+            'job_id' => $job->id,
+            'bid_amount' => $validated['bid_amount'],
+            'estimated_duration' => $validated['estimated_duration'] ?? null,
+            'cover_letter' => $validated['cover_letter'],
         ]);
 
+        $job->client->notify(
+            new ProposalSubmitted(
+                $proposal->id,
+                $job->id,
+                Auth::user()->first_name
+            )
+        );
 
 
 
@@ -213,6 +226,14 @@ class ProposalController extends Controller
 
         $proposal->update($request->validated());
 
+               $proposal->job->client->notify(
+            new ProposalUpdated(
+                $proposal->id,
+                $proposal->job->id,
+                Auth::user()->first_name
+            )
+        );
+
         return ResponseService::Response(
             ['proposal' => new ProposalResource($proposal->refresh())],
             200,
@@ -274,6 +295,14 @@ class ProposalController extends Controller
         $proposal->update([
             'status' => 'withdrawn',
         ]);
+
+
+         $proposal->job->client->notify(
+            new ProposalWithdrawn(
+                $proposal->id,
+                $proposal->job->id,
+                Auth::user()->first_name
+            ));
 
         return ResponseService::Response(
             ['proposal' => new ProposalResource($proposal->refresh())],

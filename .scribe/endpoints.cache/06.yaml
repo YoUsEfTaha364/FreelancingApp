@@ -148,7 +148,7 @@ endpoints:
         name: proposal_id
         description: 'The ID of the proposal.'
         required: true
-        example: 17
+        example: 2
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -178,7 +178,7 @@ endpoints:
         deprecated: false
     cleanUrlParameters:
       job_id: 1
-      proposal_id: 17
+      proposal_id: 2
       job: 12
       proposal: 5
     queryParameters: []
@@ -269,7 +269,7 @@ endpoints:
         name: proposal_id
         description: 'The ID of the proposal.'
         required: true
-        example: 17
+        example: 2
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -299,7 +299,7 @@ endpoints:
         deprecated: false
     cleanUrlParameters:
       job_id: 1
-      proposal_id: 17
+      proposal_id: 2
       job: 1
       proposal: 5
     queryParameters: []
@@ -396,7 +396,7 @@ endpoints:
         name: proposal_id
         description: 'The ID of the proposal.'
         required: true
-        example: 17
+        example: 2
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -426,7 +426,7 @@ endpoints:
         deprecated: false
     cleanUrlParameters:
       job_id: 1
-      proposal_id: 17
+      proposal_id: 2
       job: 1
       proposal: 5
     queryParameters: []
@@ -523,7 +523,7 @@ endpoints:
         name: proposal_id
         description: 'The ID of the proposal.'
         required: true
-        example: 17
+        example: 2
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -553,7 +553,7 @@ endpoints:
         deprecated: false
     cleanUrlParameters:
       job_id: 1
-      proposal_id: 17
+      proposal_id: 2
       job: 12
       proposal: 5
     queryParameters: []

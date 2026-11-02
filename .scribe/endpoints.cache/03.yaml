@@ -29,7 +29,7 @@ endpoints:
         name: proposal_id
         description: 'The ID of the proposal.'
         required: true
-        example: 17
+        example: 2
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -47,7 +47,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      proposal_id: 17
+      proposal_id: 2
       proposal: 12
     queryParameters:
       status:
@@ -81,7 +81,7 @@ endpoints:
         name: status
         description: ''
         required: false
-        example: rejected
+        example: withdrawn
         type: string
         enumValues:
           - pending
@@ -93,7 +93,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanBodyParameters:
-      status: rejected
+      status: withdrawn
     fileParameters: []
     responses:
       -
@@ -181,7 +181,7 @@ endpoints:
         name: proposal_id
         description: 'The ID of the proposal.'
         required: true
-        example: 17
+        example: 2
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -221,7 +221,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      proposal_id: 17
+      proposal_id: 2
       negotiation_id: 17
       proposal: 12
       negotiation: 8
@@ -303,7 +303,7 @@ endpoints:
         name: proposal_id
         description: 'The ID of the proposal.'
         required: true
-        example: 17
+        example: 2
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -343,7 +343,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      proposal_id: 17
+      proposal_id: 2
       negotiation_id: 17
       proposal: 12
       negotiation: 8
