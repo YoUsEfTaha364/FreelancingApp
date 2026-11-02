@@ -12,7 +12,7 @@ use App\Http\Controllers\Api\Freelancer\ProposalController;
 use App\Http\Controllers\Api\Freelancer\NegotiationController;
 use App\Http\Controllers\Api\JobController;
 use App\Http\Controllers\Api\NotificationController;
-
+use App\Http\Controllers\Api\SharedController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,7 +35,7 @@ Route::prefix('auth')->group(function () {
 
 
 
-   
+
 Route::middleware(["auth:sanctum", "freelancer"])
     ->prefix("freelancer")
     ->group(function () {
@@ -163,5 +163,10 @@ Route::middleware('auth:sanctum')
         Route::delete('/{id}', 'destroy');
     });
 
+Route::middleware(["auth:sanctum"])->group(function () {
+    Route::get("skills", [SharedController::class, "GetSkills"]);
+});
 
-
+Route::middleware(["auth:sanctum"])->group(function () {
+    Route::get("languages", [SharedController::class, "GetLanguages"]);
+});

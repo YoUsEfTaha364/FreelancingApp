@@ -78,7 +78,7 @@ class UpdateFreelancerProfileRequest extends FormRequest
             'country' => ['required', 'string', 'max:100'],
 
             'city' => ['required', 'string', 'max:100'],
-            'hourly_rate' => ['required', 'decimal'],
+            'hourly_rate' => ['required', 'numeric', 'gt:0'],
         ];
     }
 }
